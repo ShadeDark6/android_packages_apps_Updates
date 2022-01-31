@@ -41,9 +41,6 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -418,12 +415,11 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
             }
 
             @Override
-            public void onResponse(int statusCode, String url,
-                                   DownloadClient.Headers headers) {
+            public void onResponse(DownloadClient.Headers headers) {
             }
 
             @Override
-            public void onSuccess(File destination) {
+            public void onSuccess() {
                 runOnUiThread(() -> {
                     Log.d(TAG, "List downloaded");
                     processNewJson(jsonFile, jsonFileTmp, manualRefresh);

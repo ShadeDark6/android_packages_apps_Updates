@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2022 The LineageOS Project
  * Copyright (C) 2019 The PixelExperience Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -72,7 +72,7 @@ public class UpdaterService extends Service {
 
         mUpdaterController = UpdaterController.getInstance(this);
 
-        mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotificationManager = getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(
                 ONGOING_NOTIFICATION_CHANNEL,
                 getString(R.string.ongoing_channel_title),

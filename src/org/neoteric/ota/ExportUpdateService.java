@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2022 The LineageOS Project
  * Copyright (C) 2019 The PixelExperience Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -119,8 +119,7 @@ public class ExportUpdateService extends Service {
 
     private void startExporting(File source, File destination) {
         notifyExportStatusChanged(EXPORT_STATUS_RUNNING);
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = getSystemService(NotificationManager.class);
         NotificationChannel notificationChannel = new NotificationChannel(
                 EXPORT_NOTIFICATION_CHANNEL,
                 getString(R.string.export_channel_title),

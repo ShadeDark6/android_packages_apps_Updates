@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2022 The LineageOS Project
  * Copyright (C) 2019 The PixelExperience Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -55,9 +55,9 @@ public class FileUtils {
     }
 
     private static class CallbackByteChannel implements ReadableByteChannel {
-        private ProgressCallBack mCallback;
-        private long mSize;
-        private ReadableByteChannel mReadableByteChannel;
+        private final ProgressCallBack mCallback;
+        private final long mSize;
+        private final ReadableByteChannel mReadableByteChannel;
         private long mSizeRead;
         private int mProgress;
 

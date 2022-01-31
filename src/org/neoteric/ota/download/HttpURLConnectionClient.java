@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2022 The LineageOS Project
  * Copyright (C) 2019 The PixelExperience Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -125,11 +125,6 @@ public class HttpURLConnectionClient implements DownloadClient {
         public String get(String name) {
             return mClient.getHeaderField(name);
         }
-
-        @Override
-        public Map<String, List<String>> getAll() {
-            return mClient.getHeaderFields();
-        }
     }
 
     private class DownloadThread extends Thread {
@@ -182,9 +177,8 @@ public class HttpURLConnectionClient implements DownloadClient {
             String protocol = mClient.getURL().getProtocol();
 
             class DuplicateLink {
-                private String mUrl;
-                private int mPriority;
-
+                private final String mUrl;
+                private final int mPriority;
                 private DuplicateLink(String url, int priority) {
                     mUrl = url;
                     mPriority = priority;
@@ -237,9 +231,11 @@ public class HttpURLConnectionClient implements DownloadClient {
                 } catch (IOException e) {
                     if (duplicates != null && !duplicates.isEmpty()) {
                         DuplicateLink link = duplicates.poll();
-                        duplicates.remove(link);
-                        newUrl = link.mUrl;
-                        Log.e(TAG, "Using duplicate link " + link.mUrl, e);
+                        if (link != null) {
+                            duplicates.remove(link);
+                            newUrl = link.mUrl;
+                            Log.e(TAG, "Using duplicate link " + link.mUrl, e);
+                        }
                     } else {
                         throw e;
                     }
@@ -259,7 +255,7 @@ public class HttpURLConnectionClient implements DownloadClient {
                     responseCode = mClient.getResponseCode();
                 }
 
-                mCallback.onResponse(responseCode, mClient.getURL().toString(), new Headers());
+                mCallback.onResponse(new Headers());
 
                 if (mResume && isPartialContentCode(responseCode)) {
                     mTotalBytesRead = mDestination.length();
@@ -283,12 +279,11 @@ public class HttpURLConnectionClient implements DownloadClient {
                         calculateSpeed();
                         calculateEta();
                         if (mProgressListener != null) {
-                            mProgressListener.update(mTotalBytesRead, mTotalBytes, mSpeed, mEta,
-                                    false);
+                            mProgressListener.update(mTotalBytesRead, mTotalBytes, mSpeed, mEta);
                         }
                     }
                     if (mProgressListener != null) {
-                        mProgressListener.update(mTotalBytesRead, mTotalBytes, mSpeed, mEta, true);
+                        mProgressListener.update(mTotalBytesRead, mTotalBytes, mSpeed, mEta);
                     }
 
                     outputStream.flush();
@@ -296,7 +291,7 @@ public class HttpURLConnectionClient implements DownloadClient {
                     if (isInterrupted()) {
                         mCallback.onFailure(true);
                     } else {
-                        mCallback.onSuccess(mDestination);
+                        mCallback.onSuccess();
                     }
                 }
             } catch (IOException e) {

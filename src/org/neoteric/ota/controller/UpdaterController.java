@@ -144,7 +144,8 @@ public class UpdaterController {
         return new DownloadClient.DownloadCallback() {
 
             @Override
-            public void onResponse(int statusCode, String url, DownloadClient.Headers headers) {
+            public void onResponse(DownloadClient.Headers headers) {
+                if (mDownloadEntry.mUpdate == null) return;
                 String contentLength = headers.get("Content-Length");
                 if (contentLength != null) {
                     try {
@@ -162,7 +163,7 @@ public class UpdaterController {
             }
 
             @Override
-            public void onSuccess(File destination) {
+            public void onSuccess() {
                 Log.d(TAG, "Download complete");
                 mDownloadEntry.mUpdate.setStatus(UpdateStatus.VERIFYING);
                 removeDownloadClient(mDownloadEntry);
@@ -194,8 +195,8 @@ public class UpdaterController {
             private int mProgress = 0;
 
             @Override
-            public void update(long bytesRead, long contentLength, long speed, long eta,
-                               boolean done) {
+            public void update(long bytesRead, long contentLength, long speed, long eta) {
+                if (mDownloadEntry.mUpdate == null) return;
                 if (contentLength <= 0) {
                     if (mDownloadEntry.mUpdate.getFileSize() <= 0) {
                         return;
@@ -207,7 +208,7 @@ public class UpdaterController {
                     return;
                 }
                 final long now = SystemClock.elapsedRealtime();
-                int progress = Math.round(bytesRead * 100 / contentLength);
+                int progress = Math.round(bytesRead * 100f / contentLength);
                 if (progress != mProgress || mLastUpdate - now > MAX_REPORT_INTERVAL_MS) {
                     mProgress = progress;
                     mLastUpdate = now;
@@ -231,20 +232,22 @@ public class UpdaterController {
     private void verifyUpdateAsync() {
         mVerifyingUpdate = true;
         new Thread(() -> {
-            File file = mDownloadEntry.mUpdate.getFile();
-            UpdateStatus status;
-            if (file.exists() && verifyPackage(file, mDownloadEntry.mUpdate.getHash())) {
-                file.setReadable(true, false);
-                Utils.setPersistentStatus(mContext, UpdateStatus.Persistent.VERIFIED);
-                status = UpdateStatus.VERIFIED;
-            } else {
-                Utils.setPersistentStatus(mContext, UpdateStatus.Persistent.UNKNOWN);
-                resetDownloadInfo();
-                status = UpdateStatus.VERIFICATION_FAILED;
+            if (mDownloadEntry.mUpdate != null) {
+                File file = mDownloadEntry.mUpdate.getFile();
+                UpdateStatus status;
+                if (file.exists() && verifyPackage(file, mDownloadEntry.mUpdate.getHash())) {
+                    file.setReadable(true, false);
+                    Utils.setPersistentStatus(mContext, UpdateStatus.Persistent.VERIFIED);
+                    status = UpdateStatus.VERIFIED;
+                } else {
+                    Utils.setPersistentStatus(mContext, UpdateStatus.Persistent.UNKNOWN);
+                    resetDownloadInfo();
+                    status = UpdateStatus.VERIFICATION_FAILED;
+                }
+                mDownloadEntry.mUpdate.setStatus(status);
+                mVerifyingUpdate = false;
+                notifyUpdateChange(status);
             }
-            mDownloadEntry.mUpdate.setStatus(status);
-            mVerifyingUpdate = false;
-            notifyUpdateChange(status);
         }).start();
     }
 
@@ -317,6 +320,7 @@ public class UpdaterController {
             Log.d(TAG, "Already started");
             return;
         }
+        if (mDownloadEntry.mUpdate == null) return;
         Log.d(TAG, "Starting download");
         resetDownloadInfo();
         Utils.cleanupDownloadsDir(mContext);
@@ -347,7 +351,9 @@ public class UpdaterController {
     }
 
     public void setStatus(UpdateStatus status) {
-        mDownloadEntry.mUpdate.setStatus(status);
+        if (mDownloadEntry.mUpdate != null) {
+            mDownloadEntry.mUpdate.setStatus(status);
+        }
     }
 
     public void resumeDownload() {
@@ -355,6 +361,7 @@ public class UpdaterController {
             Log.d(TAG, "Already downloading");
             return;
         }
+        if (mDownloadEntry.mUpdate == null) return;
         Log.d(TAG, "Resuming download");
         File file = mDownloadEntry.mUpdate.getFile();
         if (file == null || !file.exists()) {
@@ -396,6 +403,7 @@ public class UpdaterController {
     }
 
     public boolean pauseDownload() {
+        if (mDownloadEntry.mUpdate == null) return false;
         if (!isDownloading()) {
             Log.d(TAG, "Not downloading");
             return false;

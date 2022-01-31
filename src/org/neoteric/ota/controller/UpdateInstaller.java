@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2022 The LineageOS Project
  * Copyright (C) 2019 The PixelExperience Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -97,7 +97,7 @@ class UpdateInstaller {
         Runnable copyUpdateRunnable = new Runnable() {
             private long mLastUpdate = -1;
 
-            FileUtils.ProgressCallBack mProgressCallBack = new FileUtils.ProgressCallBack() {
+            final FileUtils.ProgressCallBack mProgressCallBack = new FileUtils.ProgressCallBack() {
                 @Override
                 public void update(int progress) {
                     long now = SystemClock.elapsedRealtime();
@@ -135,6 +135,7 @@ class UpdateInstaller {
                     }
                 } catch (IOException e) {
                     Log.e(TAG, "Could not copy update", e);
+                    //noinspection ResultOfMethodCallIgnored
                     uncryptFile.delete();
                     status = UpdateStatus.INSTALLATION_FAILED;
                     mUpdaterController.setStatus(UpdateStatus.INSTALLATION_FAILED);
