@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota;
+package org.zephyrus.ota;
 
 import androidx.appcompat.app.AppCompatActivity;
 

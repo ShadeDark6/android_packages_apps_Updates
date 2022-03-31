@@ -322,7 +322,7 @@ public class UpdatesActivity extends UpdatesListActivity {
 
     private void loadUpdatesList(File jsonFile, boolean manualRefresh)
             throws IOException, JSONException {
-        mExtrasFragment.updatePrefs(Utils.parseJson(jsonFile, false, this));
+        mExtrasFragment.updatePrefs();
         Log.d(TAG, "Adding remote updates");
         UpdaterController controller = mUpdaterService.getUpdaterController();
 

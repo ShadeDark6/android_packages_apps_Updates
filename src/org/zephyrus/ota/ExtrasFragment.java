@@ -8,30 +8,51 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import org.zephyrus.ota.misc.Utils;
-import org.zephyrus.ota.model.MaintainerInfo;
-import org.zephyrus.ota.model.UpdateInfo;
+
+import org.zephyrus.ota.R;
 
 import java.util.ArrayList;
 
 public class ExtrasFragment extends Fragment {
 
     private View mainView;
-    private LinearLayout maintainersLayout;
+    private ExtraCardView maintainerCard;
     private ExtraCardView donateCard;
+    private ExtraCardView groupCard;
+
+    private String[] deviceList;
+    private String[] maintainerNameList;
+    private String[] maintainerLinkList;
+    private String[] donateList;
+    private String[] groupList;
+    private int device_index = -1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mainView = inflater.inflate(R.layout.extras_fragment, container, false);
-        maintainersLayout = mainView.findViewById(R.id.maintainers);
+        maintainerCard = mainView.findViewById(R.id.maintainer_card);
         donateCard = mainView.findViewById(R.id.donate_card);
+        groupCard = mainView.findViewById(R.id.group_card);
+
+        deviceList = getContext().getResources().getStringArray(
+                R.array.config_device_list);
+        maintainerNameList = getContext().getResources().getStringArray(
+                R.array.config_maintainer_name_list);
+        maintainerLinkList = getContext().getResources().getStringArray(
+                R.array.config_maintainer_link_list);
+        donateList = getContext().getResources().getStringArray(
+                R.array.config_donate_list);
+        groupList = getContext().getResources().getStringArray(
+                R.array.config_group_list);
+        device_index = getDeviceIndex();
+
         return mainView;
     }
 
@@ -40,48 +61,34 @@ public class ExtrasFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    void updatePrefs(UpdateInfo update) {
-        Log.d("ExtrasFragment:updatePrefs", "called");
-        if (update == null) {
-            Log.d("ExtrasFragment:updatePrefs", "update is null");
-            mainView.setVisibility(View.GONE);
-            return;
+    private int getDeviceIndex() {
+        final String device = Utils.getDevice();
+        if (device == null || device.isEmpty()) return -1;
+        for (int i = 0; i < deviceList.length; ++i) {
+            if (device.equals(deviceList[i])) return i;
         }
-
-        ArrayList<MaintainerInfo> maintainers = update.getMaintainers();
-        if (maintainers != null && !maintainers.isEmpty()) {
-            maintainersLayout.removeAllViews();
-            for (MaintainerInfo maintainer : maintainers) {
-                ExtraCardView maintainerCard = createMaintainerCard(getActivity());
-                maintainerCard.setSummary(maintainer.getName());
-                maintainerCard.setOnClickListener(v -> openUrl(Utils.getMaintainerURL(maintainer.getUsername())));
-                maintainerCard.setClickable(true);
-                maintainersLayout.addView(maintainerCard);
-            }
-        }
-
-        if (update.getDonateUrl() != null && !update.getDonateUrl().isEmpty()) {
-            donateCard.setOnClickListener(v -> openUrl(update.getDonateUrl()));
-            donateCard.setClickable(true);
-            donateCard.setVisibility(View.VISIBLE);
-        }
-
+        return -1;
     }
 
-    private ExtraCardView createMaintainerCard(Context context) {
-        ExtraCardView card = new ExtraCardView(context);
-        card.setTitle(getString(R.string.maintainer_info_title));
-        card.setImage(getResources().getDrawable(R.drawable.ic_maintainers_icon, context.getTheme()));
-        card.setCardBackgroundColor(getResources().getColor(R.color.cardview_background, context.getTheme()));
-        card.setRadius(getResources().getDimension(R.dimen.extra_card_corner_radius));
-        card.setCardElevation(getResources().getDimension(R.dimen.extra_card_elevation));
-        int padding = (int) getResources().getDimension(R.dimen.extra_card_content_padding);
-        card.setContentPadding(padding, padding, padding, padding);
-        int extraMargin = (int) getResources().getDimension(R.dimen.extra_card_layout_margin);
-        LinearLayout.LayoutParams buttonLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        buttonLayoutParams.setMargins(extraMargin, extraMargin, extraMargin, extraMargin);
-        card.setLayoutParams(buttonLayoutParams);
-        return card;
+    void updatePrefs() {
+        if (device_index != -1) {
+            maintainerCard.setOnClickListener(v -> openUrl(maintainerLinkList[device_index]));
+            maintainerCard.setSummary(maintainerNameList[device_index]);
+            maintainerCard.setClickable(true);
+
+            donateCard.setOnClickListener(v -> openUrl(donateList[device_index]));
+            donateCard.setClickable(true);
+            donateCard.setVisibility(View.VISIBLE);
+
+            groupCard.setOnClickListener(v -> openUrl(groupList[device_index]));
+            groupCard.setClickable(true);
+            groupCard.setVisibility(View.VISIBLE);
+        } else {
+            maintainerCard.setSummary(getContext().getResources().getString(
+                    R.string.maintainer_info_unknown));
+            maintainerCard.setClickable(false);
+        }
+        maintainerCard.setVisibility(View.VISIBLE);
     }
 
     private void showSnackbar(int stringId, int duration) {

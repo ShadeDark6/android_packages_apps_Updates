@@ -35,7 +35,6 @@ import com.google.gson.reflect.TypeToken;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.zephyrus.ota.controller.UpdaterService;
-import org.zephyrus.ota.model.MaintainerInfo;
 import org.zephyrus.ota.model.Update;
 import org.zephyrus.ota.model.UpdateBaseInfo;
 import org.zephyrus.ota.model.UpdateInfo;
@@ -51,7 +50,6 @@ import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -84,14 +82,6 @@ public class Utils {
     // This should really return an UpdateBaseInfo object, but currently this only
     // used to initialize UpdateInfo objects
     private static UpdateInfo parseJsonUpdate(JSONObject object, Context context) throws JSONException {
-        ArrayList<MaintainerInfo> maintainers;
-        try {
-            maintainers = new Gson().fromJson(object.getJSONArray("maintainers").toString(),
-                    new TypeToken<ArrayList<MaintainerInfo>>() {
-                    }.getType());
-        } catch (Exception e2) {
-            maintainers = new ArrayList<>();
-        }
         Update update = new Update();
         update.setTimestamp(object.getLong("date"));
         update.setName(object.getString("filename"));
@@ -100,8 +90,6 @@ public class Utils {
         update.setDownloadUrl(object.getString("url"));
         update.setVersion(object.getString("version"));
         update.setHash(object.getString("md5"));
-        update.setMaintainers(maintainers);
-        update.setDonateUrl(object.isNull("donate_url") ? "" : object.getString("donate_url"));
         return update;
     }
 
@@ -155,20 +143,12 @@ public class Utils {
         return SystemProperties.get(Constants.PROP_BUILD_VERSION);
     }
 
-    private static String getDevice() {
+    public static String getDevice() {
         return SystemProperties.get(Constants.PROP_DEVICE);
     }
 
     public static String getJsonURL() {
         return String.format(Constants.OTA_URL, getVersion(), getDevice());
-    }
-
-    public static String getMaintainerURL(String username) {
-        return String.format(Constants.MAINTAINER_URL, username);
-    }
-
-    public static String getDownloadWebpageUrl(String fileName) {
-        return String.format(Constants.DOWNLOAD_WEBPAGE_URL, SystemProperties.get(Constants.PROP_DEVICE), fileName);
     }
 
     public static void triggerUpdate(Context context) {

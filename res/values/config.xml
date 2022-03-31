@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string-array name="config_device_list" translatable="false">
+   </string-array>
+
+   <string-array name="config_maintainer_name_list" translatable="false">
+   </string-array>
+
+   <string-array name="config_maintainer_link_list" translatable="false">
+   </string-array>
+
+   <string-array name="config_donate_list" translatable="false">
+   </string-array>
+
+   <string-array name="config_group_list" translatable="false">
+   </string-array>
+</resources>

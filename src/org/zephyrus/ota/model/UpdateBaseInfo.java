@@ -31,9 +31,5 @@ public interface UpdateBaseInfo {
 
     long getFileSize();
 
-    String getDonateUrl();
-
-    ArrayList<MaintainerInfo> getMaintainers();
-
     String getHash();
 }

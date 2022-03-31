@@ -26,8 +26,6 @@ public class UpdateBase implements UpdateBaseInfo {
     private long mTimestamp;
     private String mVersion;
     private long mFileSize;
-    private String mDonateUrl;
-    private ArrayList<MaintainerInfo> mMaintainers;
     private String mHash;
 
     UpdateBase() {
@@ -94,24 +92,6 @@ public class UpdateBase implements UpdateBaseInfo {
 
     public void setFileSize(long fileSize) {
         mFileSize = fileSize;
-    }
-
-    @Override
-    public String getDonateUrl() {
-        return mDonateUrl;
-    }
-
-    public void setDonateUrl(String donateUrl) {
-        mDonateUrl = donateUrl;
-    }
-
-    @Override
-    public ArrayList<MaintainerInfo> getMaintainers() {
-        return mMaintainers;
-    }
-
-    public void setMaintainers(ArrayList<MaintainerInfo> maintainers) {
-        mMaintainers = maintainers;
     }
 
     @Override
