@@ -30,6 +30,7 @@
             extra_card_view:summary="@string/local_update_summary"
             extra_card_view:title="@string/local_update_title" />
 
+
         <org.zephyrus.ota.ExtraCardView
             android:id="@+id/maintainer_card"
             android:layout_width="match_parent"

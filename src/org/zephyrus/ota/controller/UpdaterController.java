@@ -68,7 +68,7 @@ public class UpdaterController {
         mContext = context.getApplicationContext();
     }
 
-    static synchronized UpdaterController getInstance(Context context) {
+    public static synchronized UpdaterController getInstance(Context context) {
         if (sUpdaterController == null) {
             sUpdaterController = new UpdaterController(context);
         }
@@ -280,7 +280,7 @@ public class UpdaterController {
             File destination = new File(mDownloadRoot, update.getName());
             if (destination.exists()){
                 update.setFile(destination);
-                if(Utils.isABDevice() && isInstallingABUpdate()){
+                if(Utils.isABDevice() && (isInstallingABUpdate() || update.getDownloadId().equals(Update.LOCAL_ID))){
                     update.setStatus(UpdateStatus.INSTALLING);
                 }else{
                     verifyUpdateAsync();
@@ -303,7 +303,6 @@ public class UpdaterController {
             update.setStatus(UpdateStatus.STARTING);
         } else {
             update.setStatus(UpdateStatus.UNKNOWN);
-            Utils.cleanupDownloadsDir(mContext);
             Utils.setPersistentStatus(mContext, UpdateStatus.Persistent.UNKNOWN);
         }
         notifyUpdateChange(update.getStatus());

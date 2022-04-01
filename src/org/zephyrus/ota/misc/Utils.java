@@ -142,7 +142,7 @@ public class Utils {
         return SystemProperties.getLong(Constants.PROP_BUILD_DATE, 0) * 1000;
     }
 
-    private static String getVersion() {
+    public static String getVersion() {
         return SystemProperties.get(Constants.PROP_BUILD_VERSION);
     }
 
