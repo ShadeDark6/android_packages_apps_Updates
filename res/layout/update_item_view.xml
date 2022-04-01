@@ -119,24 +119,10 @@
             android:weightSum="1">
 
             <Button
-                android:id="@+id/update_action"
-                style="@style/Widget.RaisedButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:drawableStart="@drawable/ic_pause"
-                android:drawablePadding="5dp"
-                android:drawableTint="?android:textColorPrimaryInverse"
-                android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
-                android:textAllCaps="false"
-                android:textColor="?android:textColorPrimaryInverse"
-                tools:text="Pause" />
-
-            <Button
                 android:id="@+id/details_action"
                 style="@style/Widget.RaisedButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_marginStart="10dp"
                 android:drawableStart="@drawable/ic_updateui_information"
                 android:drawablePadding="5dp"
                 android:drawableTint="?android:textColorPrimaryInverse"
@@ -144,6 +130,20 @@
                 android:text="@string/details_button"
                 android:textAllCaps="false"
                 android:textColor="?android:textColorPrimaryInverse" />
+
+            <Button
+                android:id="@+id/update_action"
+                style="@style/Widget.RaisedButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:drawableStart="@drawable/ic_pause"
+                android:drawablePadding="5dp"
+                android:drawableTint="?android:textColorPrimaryInverse"
+                android:fontFamily="@*android:string/config_headlineFontFamilyMedium"
+                android:textAllCaps="false"
+                android:textColor="?android:textColorPrimaryInverse"
+                tools:text="Pause" />
         </LinearLayout>
 
     </LinearLayout>

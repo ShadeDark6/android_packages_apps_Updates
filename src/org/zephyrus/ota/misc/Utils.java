@@ -150,6 +150,10 @@ public class Utils {
     public static String getJsonURL() {
         return String.format(Constants.OTA_URL, getVersion(), getDevice());
     }
+    
+    private static String getChangelogURL(long unixTimestamp) {
+        return String.format(Constants.CHANGELOG_URL, getVersion(), getDevice(), StringGenerator.getChangelogDate(unixTimestamp));
+    }
 
     public static void triggerUpdate(Context context) {
         final Intent intent = new Intent(context, UpdaterService.class);

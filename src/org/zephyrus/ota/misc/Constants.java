@@ -21,7 +21,7 @@ public final class Constants {
     public static final String AB_PAYLOAD_PROPERTIES_PATH = "payload_properties.txt";
     public static final String PREF_MOBILE_DATA_WARNING = "pref_mobile_data_warning";
     public static final String UNCRYPT_FILE_EXT = ".uncrypt";
-    public static final String PROP_BUILD_DATE = "org.zephyrus.build_date_utc";
+    public static final String PROP_BUILD_DATE = "ro.build.date.utc";
     public static final String PROP_BUILD_TYPE = "org.zephyrus.build_type";
     public static final String PREF_CURRENT_PERSISTENT_STATUS = "current_persistent_status";
     public static final String PREF_INSTALLING_AB_ID = "installing_ab_id";
@@ -30,5 +30,6 @@ public final class Constants {
     static final String PROP_DEVICE = "ro.zephyrus.device";
     static final String PROP_BUILD_VERSION = "ro.zephyrus.version";
     static final String OTA_URL = "https://raw.githubusercontent.com/Project-Zephyrus-Devices/OTA/%s/%s/ota.json";
+    static final String CHANGELOG_URL = "https://github.com/Project-Zephyrus-Devices/OTA/blob/%s/%s/changelog_%s.txt";
     static final String EXPORT_PATH = "Project-Zephyrus-Updates/";
 }

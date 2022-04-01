@@ -22,6 +22,7 @@ import android.content.res.Resources;
 import org.zephyrus.ota.R;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -34,6 +35,12 @@ public final class StringGenerator {
         f.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date(unixTimestamp * 1000);
         return f.format(date);
+    }
+
+    public static String getChangelogDate(long unixTimestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd");
+        Date date = new Date(unixTimestamp * 1000);
+        return sdf.format(date);
     }
 
     public static String formatETA(Context context, long millis) {

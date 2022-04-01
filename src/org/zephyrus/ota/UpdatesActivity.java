@@ -50,6 +50,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
+import org.zephyrus.ota.ExtrasFragment.UpdateListener;
 import org.zephyrus.ota.controller.ABUpdateInstaller;
 import org.zephyrus.ota.controller.UpdaterController;
 import org.zephyrus.ota.controller.UpdaterService;

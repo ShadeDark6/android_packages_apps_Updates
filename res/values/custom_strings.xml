@@ -64,7 +64,7 @@
     <string name="reboot">Reboot</string>
     <string name="reboot_needed_dialog_title">Restart needed</string>
     <string name="reboot_needed_dialog_summary">To complete the installation of the update, your device needs to be restarted. Do you want to restart now?</string>
-    <string name="details_button">View details</string>
+    <string name="details_button">Changelog</string>
 
     <!-- Installation -->
     <string name="apply_update_dialog_title">Apply update</string>
