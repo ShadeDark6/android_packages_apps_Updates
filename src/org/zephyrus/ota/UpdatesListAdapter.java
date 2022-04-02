@@ -24,6 +24,7 @@ import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -68,6 +69,8 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
     private Context mContext;
     private LocalBroadcastManager mBroadcastManager;
 
+    private Vibrator mVibrator;
+
     UpdatesListAdapter() {
     }
 
@@ -91,6 +94,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         super.onAttachedToRecyclerView(recyclerView);
         mContext = recyclerView.getContext();
         mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     void setUpdaterController(UpdaterController updaterController) {
@@ -227,6 +231,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         viewHolder.mBuildName.setText(buildVersion);
         viewHolder.mBuildName.setCompoundDrawables(null, null, null, null);
         viewHolder.mDetails.setOnClickListener(v -> {
+            Utils.doHapticFeedback(mContext, mVibrator);
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Utils.getChangelogURL(mUpdate.getTimestamp() / 1000)));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -339,6 +344,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         // Disable action mode when a button is clicked
         button.setOnClickListener(v -> {
             if (clickListener != null) {
+                Utils.doHapticFeedback(mContext, mVibrator);
                 clickListener.onClick(v);
             }
         });

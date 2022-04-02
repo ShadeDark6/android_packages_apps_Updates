@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,8 @@ public class ExtrasFragment extends Fragment {
     private String[] groupList;
     private int device_index = -1;
 
+    private Vibrator mVibrator;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class ExtrasFragment extends Fragment {
                 R.array.config_group_list);
         device_index = getDeviceIndex();
 
+        mVibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+
         return mainView;
     }
 
@@ -72,15 +77,24 @@ public class ExtrasFragment extends Fragment {
 
     void updatePrefs() {
         if (device_index != -1) {
-            maintainerCard.setOnClickListener(v -> openUrl(maintainerLinkList[device_index]));
+            maintainerCard.setOnClickListener(v -> {
+                Utils.doHapticFeedback(getContext(), mVibrator);
+                openUrl(maintainerLinkList[device_index]);
+            });
             maintainerCard.setSummary(maintainerNameList[device_index]);
             maintainerCard.setClickable(true);
 
-            donateCard.setOnClickListener(v -> openUrl(donateList[device_index]));
+            donateCard.setOnClickListener(v -> {
+                Utils.doHapticFeedback(getContext(), mVibrator);
+                openUrl(donateList[device_index]);
+            });
             donateCard.setClickable(true);
             donateCard.setVisibility(View.VISIBLE);
 
-            groupCard.setOnClickListener(v -> openUrl(groupList[device_index]));
+            groupCard.setOnClickListener(v -> {
+                Utils.doHapticFeedback(getContext(), mVibrator);
+                openUrl(groupList[device_index]);
+            });
             groupCard.setClickable(true);
             groupCard.setVisibility(View.VISIBLE);
         } else {

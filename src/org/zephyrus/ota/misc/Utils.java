@@ -26,7 +26,10 @@ import android.net.NetworkInfo;
 import android.os.Environment;
 import android.os.PowerManager;
 import android.os.SystemProperties;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.os.storage.StorageManager;
+import android.provider.Settings;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -339,5 +342,14 @@ public class Utils {
     public static void setPersistentStatus(Context context, int status){
         SharedPreferences preferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context);
         preferences.edit().putInt(Constants.PREF_CURRENT_PERSISTENT_STATUS, status).commit();
+    }
+
+    public static void doHapticFeedback(Context context, Vibrator vibrator) {
+        if (vibrator != null &&
+            Settings.System.getInt(
+                context.getContentResolver(),
+                Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0 ) {
+            vibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
+        }
     }
 }
