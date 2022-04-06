@@ -268,6 +268,8 @@ public class ABUpdateInstaller {
             Intent intent = new Intent();
             intent.setAction(ACTION_RESTART_PENDING);
             mBroadcastManager.sendBroadcast(intent);
+
+            Utils.cleanupDownloadsDir(mContext);
         }
     }
 }
