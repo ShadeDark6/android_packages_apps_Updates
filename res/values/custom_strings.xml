@@ -63,7 +63,7 @@
     <string name="resume_button">Resume</string>
     <string name="reboot">Reboot</string>
     <string name="reboot_needed_dialog_title">Restart needed</string>
-    <string name="reboot_needed_dialog_summary">To complete the installation of the update, your device needs to be restarted. Do you want to restart now?</string>
+    <string name="reboot_needed_dialog_summary">To complete the installation of the update, your device needs to be restarted.\n\nIf you want to keep magisk installed, please click \'cancel\' and flash magisk to the new slot before reboot.\n\nDo you want to restart now?</string>
     <string name="details_button">Changelog</string>
 
     <!-- Installation -->
