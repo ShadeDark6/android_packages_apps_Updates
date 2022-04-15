@@ -31,5 +31,6 @@ public final class Constants {
     static final String PROP_BUILD_VERSION = "ro.zephyrus.version";
     static final String OTA_URL = "https://raw.githubusercontent.com/Project-Zephyrus-Devices/OTA/%s/%s/ota.json";
     static final String CHANGELOG_URL = "https://github.com/Project-Zephyrus-Devices/OTA/blob/%s/%s/changelog_%s.txt";
+    static final String CHANGELOG_URL_LOCALE = "https://raw.githubusercontent.com/Project-Zephyrus-Devices/OTA/%s/%s/changelog_%s-%s-r%s.txt";
     static final String EXPORT_PATH = "Project-Zephyrus-Updates/";
 }

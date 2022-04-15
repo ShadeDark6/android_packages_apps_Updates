@@ -475,8 +475,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
                 mContext.getString(R.string.fetch_changelog_title),
                 mContext.getString(R.string.fetch_changelog_progress), true, false);
         new Thread(() -> {
-            String url = Utils.getChangelogURL(timestamp);
-            String changelog = Utils.readChangelogFromUrl(url);
+            String changelog = Utils.getChangelog(mContext, timestamp);
             mRecyclerView.post(new Runnable() {
                 @Override
                 public void run() {

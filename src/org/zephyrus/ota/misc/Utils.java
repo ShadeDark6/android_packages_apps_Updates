@@ -157,9 +157,26 @@ public class Utils {
     public static String getJsonURL() {
         return String.format(Constants.OTA_URL, getVersion(), getDevice());
     }
-    
+
+    public static String getChangelog(Context context, long unixTimestamp) {
+        String url = getChangelogURL(context, unixTimestamp);
+        String changelog = readChangelogFromUrl(url);
+        if (changelog != "" && changelog != null) {
+            return changelog;
+        }
+        url = getChangelogURL(unixTimestamp);
+        changelog = readChangelogFromUrl(url);
+        return changelog;
+    }
+
     private static String getChangelogURL(long unixTimestamp) {
         return String.format(Constants.CHANGELOG_URL, getVersion(), getDevice(), StringGenerator.getChangelogDate(unixTimestamp));
+    }
+
+    private static String getChangelogURL(Context context, long unixTimestamp) {
+        return String.format(Constants.CHANGELOG_URL_LOCALE, getVersion(), getDevice(), StringGenerator.getChangelogDate(unixTimestamp),
+                context.getResources().getConfiguration().locale.getLanguage(),
+                context.getResources().getConfiguration().locale.getCountry());
     }
 
     public static void triggerUpdate(Context context) {
