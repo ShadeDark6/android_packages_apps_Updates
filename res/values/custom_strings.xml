@@ -120,4 +120,9 @@
     <string name="local_update_import_failure">Failed to import local update</string>
     <string name="local_update_import_install">Install</string>
     <string name="local_update_import_progress">Importing local update\u2026</string>
+
+    <!-- Changelog -->
+    <string name="fetch_changelog_failed">Failed to fetch changelog</string>
+    <string name="fetch_changelog_title">Changelog</string>
+    <string name="fetch_changelog_progress">Fetching changelog\u2026</string>
 </resources>

@@ -50,7 +50,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
@@ -351,6 +354,33 @@ public class Utils {
                 context.getContentResolver(),
                 Settings.System.HAPTIC_FEEDBACK_ENABLED, 1) != 0 ) {
             vibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_CLICK));
+        }
+    }
+
+    public static String readChangelogFromUrl(String url) {
+        String res = "";
+        try {
+            URL getUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) getUrl.openConnection();
+            conn.setRequestProperty("User-Agent", "org.zephyrus.ota");
+            conn.setConnectTimeout(3000);
+            conn.connect();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                line = new String(line.getBytes(), "utf-8");
+                if (sb.toString() == "") {
+                    sb.append(line);
+                } else {
+                    sb.append("\n" + line);
+                }
+            }
+            reader.close();
+            conn.disconnect();
+            return sb.toString();
+        } catch (Exception e) {
+            return "";
         }
     }
 }

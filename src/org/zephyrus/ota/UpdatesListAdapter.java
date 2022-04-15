@@ -18,6 +18,7 @@ package org.zephyrus.ota;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -72,6 +73,8 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
 
     private Vibrator mVibrator;
 
+    private RecyclerView mRecyclerView;
+
     UpdatesListAdapter() {
     }
 
@@ -93,6 +96,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        mRecyclerView = recyclerView;
         mContext = recyclerView.getContext();
         mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
@@ -233,13 +237,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         viewHolder.mBuildName.setCompoundDrawables(null, null, null, null);
         viewHolder.mDetails.setOnClickListener(v -> {
             Utils.doHapticFeedback(mContext, mVibrator);
-            try {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Utils.getChangelogURL(mUpdate.getTimestamp() / 1000)));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-            } catch (Exception ex) {
-                showSnackbar(mContext.getString(R.string.error_open_url));
-            }
+            showChangelog(mUpdate.getTimestamp() / 1000);
         });
 
         if (activeLayout) {
@@ -466,6 +464,38 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
                 mContext.getResources().getInteger(R.integer.battery_ok_percentage_charging) :
                 mContext.getResources().getInteger(R.integer.battery_ok_percentage_discharging);
         return percent >= required;
+    }
+
+    private void showChangelog(long timestamp) {
+        if (!Utils.isNetworkAvailable(mContext)) {
+            showSnackbar(mContext.getString(R.string.fetch_changelog_failed));
+            return;
+        }
+        final ProgressDialog fetchDialog = ProgressDialog.show(mContext,
+                mContext.getString(R.string.fetch_changelog_title),
+                mContext.getString(R.string.fetch_changelog_progress), true, false);
+        new Thread(() -> {
+            String url = Utils.getChangelogURL(timestamp);
+            String changelog = Utils.readChangelogFromUrl(url);
+            mRecyclerView.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (fetchDialog != null) {
+                        fetchDialog.dismiss();
+                    }
+                    if (changelog != "" && changelog != null) {
+                        new AlertDialog.Builder(mContext)
+                            .setTitle(mContext.getString(R.string.fetch_changelog_title))
+                            .setMessage(changelog)
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
+                            .create()
+                            .show();
+                    } else {
+                        showSnackbar(mContext.getString(R.string.fetch_changelog_failed));
+                    }
+                }
+            });
+        }).start();
     }
 
     private void showSnackbar(String text) {
