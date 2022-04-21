@@ -474,7 +474,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         final ProgressDialog fetchDialog = ProgressDialog.show(mContext,
                 mContext.getString(R.string.fetch_changelog_title),
                 mContext.getString(R.string.fetch_changelog_progress), true, false);
-        new Thread(() -> {
+        final Thread fetchThread = new Thread(() -> {
             String changelog = Utils.getChangelog(mContext, timestamp);
             mRecyclerView.post(new Runnable() {
                 @Override
@@ -494,6 +494,19 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
                     }
                 }
             });
+        });
+        fetchThread.start();
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ignore) {}
+            if (fetchDialog != null && fetchDialog.isShowing()) {
+                if (fetchThread != null && fetchThread.isAlive()) {
+                    fetchThread.interrupt();
+                }
+                fetchDialog.dismiss();
+                showSnackbar(mContext.getString(R.string.fetch_changelog_failed));
+            }
         }).start();
     }
 
