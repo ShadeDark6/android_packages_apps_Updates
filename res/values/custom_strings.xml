@@ -125,4 +125,6 @@
     <string name="fetch_changelog_failed">Failed to fetch changelog</string>
     <string name="fetch_changelog_title">Changelog</string>
     <string name="fetch_changelog_progress">Fetching changelog\u2026</string>
+    <string name="copy_changelog">Copy</string>
+    <string name="copy_changelog_success">Successfully copied changelog to clipboard</string>
 </resources>

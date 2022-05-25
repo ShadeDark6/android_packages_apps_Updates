@@ -19,6 +19,8 @@ package org.zephyrus.ota;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -487,6 +489,13 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
                             .setTitle(mContext.getString(R.string.fetch_changelog_title))
                             .setMessage(changelog)
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
+                            .setNegativeButton(R.string.copy_changelog, (dialog, which) -> {
+                                ClipboardManager cm = (ClipboardManager) mContext.getSystemService(Context.CLIPBOARD_SERVICE);
+                                ClipData cd = ClipData.newPlainText("Changelog", changelog);
+                                cm.setPrimaryClip(cd);
+                                showSnackbar(mContext.getString(R.string.copy_changelog_success));
+                                dialog.dismiss();
+                            })
                             .create()
                             .show();
                     } else {
