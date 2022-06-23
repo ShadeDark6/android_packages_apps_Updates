@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota.misc;
+package org.zephyrus.ota.misc;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -34,12 +34,12 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.pixelexperience.ota.controller.UpdaterService;
-import org.pixelexperience.ota.model.MaintainerInfo;
-import org.pixelexperience.ota.model.Update;
-import org.pixelexperience.ota.model.UpdateBaseInfo;
-import org.pixelexperience.ota.model.UpdateInfo;
-import org.pixelexperience.ota.model.UpdateStatus;
+import org.zephyrus.ota.controller.UpdaterService;
+import org.zephyrus.ota.model.MaintainerInfo;
+import org.zephyrus.ota.model.Update;
+import org.zephyrus.ota.model.UpdateBaseInfo;
+import org.zephyrus.ota.model.UpdateInfo;
+import org.zephyrus.ota.model.UpdateStatus;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -93,27 +93,24 @@ public class Utils {
             maintainers = new ArrayList<>();
         }
         Update update = new Update();
-        update.setTimestamp(object.getLong("datetime"));
+        update.setTimestamp(object.getLong("date"));
         update.setName(object.getString("filename"));
         update.setDownloadId(object.getString("id"));
-        update.setFileSize(object.getLong("size"));
+        update.setFileSize(object.getLong("filesize"));
         update.setDownloadUrl(object.getString("url"));
         update.setVersion(object.getString("version"));
-        update.setHash(object.getString("filehash"));
+        update.setHash(object.getString("md5"));
         update.setMaintainers(maintainers);
         update.setDonateUrl(object.isNull("donate_url") ? "" : object.getString("donate_url"));
-        update.setForumUrl(object.isNull("forum_url") ? "" : object.getString("forum_url"));
-        update.setWebsiteUrl(object.isNull("website_url") ? "" : object.getString("website_url"));
-        update.setNewsUrl(object.isNull("news_url") ? "" : object.getString("news_url"));
         return update;
     }
 
     public static boolean isCompatible(UpdateBaseInfo update) {
-        if (update.getVersion().compareTo(SystemProperties.get(Constants.PROP_BUILD_VERSION)) < 0) {
+        if (update.getVersion().compareTo(getVersion()) < 0) {
             Log.d(TAG, update.getName() + " with version " + update.getVersion() + " is older than current Android version " + SystemProperties.get(Constants.PROP_BUILD_VERSION));
             return false;
         }
-        if (update.getTimestamp() <= SystemProperties.getLong(Constants.PROP_BUILD_DATE, 0)) {
+        if (update.getTimestamp() <= getBuildDate()) {
             Log.d(TAG, update.getName() + " with timestamp " + update.getTimestamp() + " is older than/equal to the current build " + SystemProperties.getLong(Constants.PROP_BUILD_DATE, 0));
             return false;
         }
@@ -121,9 +118,8 @@ public class Utils {
     }
 
     public static boolean canInstall(UpdateBaseInfo update) {
-        return (update.getTimestamp() > SystemProperties.getLong(Constants.PROP_BUILD_DATE, 0)) &&
-                update.getVersion().equalsIgnoreCase(
-                        SystemProperties.get(Constants.PROP_BUILD_VERSION));
+         return (update.getTimestamp() > getBuildDate()) &&
+                update.getVersion().equalsIgnoreCase(getVersion());
     }
 
     public static UpdateInfo parseJson(File file, boolean compatibleOnly, Context context)
@@ -151,17 +147,20 @@ public class Utils {
         return null;
     }
 
-    private static String getBuildType(){
-        return SystemProperties.get(Constants.PROP_BUILD_TYPE, "");
+    private static long getBuildDate() {
+        return SystemProperties.getLong(Constants.PROP_BUILD_DATE, 0) * 1000;
     }
 
-    public static String getServerURL() {
-        String buildType = getBuildType();
-        if (buildType.equals("OFFICIAL")){
-            return String.format(Constants.OTA_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
-        }else{
-            return String.format(Constants.OTA_CI_URL, SystemProperties.get(Constants.PROP_DEVICE), SystemProperties.get(Constants.PROP_BUILD_VERSION));
-        }
+    private static String getVersion() {
+        return SystemProperties.get(Constants.PROP_BUILD_VERSION);
+    }
+
+    private static String getDevice() {
+        return SystemProperties.get(Constants.PROP_DEVICE);
+    }
+
+    public static String getJsonURL() {
+        return String.format(Constants.OTA_URL, getVersion(), getDevice());
     }
 
     public static String getMaintainerURL(String username) {

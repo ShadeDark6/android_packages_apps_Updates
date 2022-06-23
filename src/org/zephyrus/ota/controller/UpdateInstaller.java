@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota.controller;
+package org.zephyrus.ota.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -22,11 +22,11 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Log;
 
-import org.pixelexperience.ota.misc.Constants;
-import org.pixelexperience.ota.misc.FileUtils;
-import org.pixelexperience.ota.misc.Utils;
-import org.pixelexperience.ota.model.UpdateInfo;
-import org.pixelexperience.ota.model.UpdateStatus;
+import org.zephyrus.ota.misc.Constants;
+import org.zephyrus.ota.misc.FileUtils;
+import org.zephyrus.ota.misc.Utils;
+import org.zephyrus.ota.model.UpdateInfo;
+import org.zephyrus.ota.model.UpdateStatus;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +71,7 @@ class UpdateInstaller {
         }
 
         UpdateInfo update = mUpdaterController.getCurrentUpdate();
-        if (SystemProperties.get(Constants.PROP_RECOVERY_UPDATE, "").equals("true") && Utils.isEncrypted(mContext, update.getFile())) {
+        if (Utils.isEncrypted(mContext, update.getFile())) {
             // uncrypt rewrites the file so that it can be read without mounting
             // the filesystem, so create a copy of it.
             prepareForUncryptAndInstall(update);

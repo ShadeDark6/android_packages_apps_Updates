@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota;
+package org.zephyrus.ota;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,13 +23,13 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import org.pixelexperience.ota.misc.Constants;
-import org.pixelexperience.ota.misc.Utils;
+import org.zephyrus.ota.misc.Constants;
+import org.zephyrus.ota.misc.Utils;
 
 public class UpdaterReceiver extends BroadcastReceiver {
 
     public static final String ACTION_INSTALL_REBOOT =
-            "org.pixelexperience.ota.action.INSTALL_REBOOT";
+            "org.zephyrus.ota.action.INSTALL_REBOOT";
 
     @Override
     public void onReceive(Context context, Intent intent) {

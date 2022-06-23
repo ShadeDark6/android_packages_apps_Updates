@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota;
+package org.zephyrus.ota;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -41,12 +41,12 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.pixelexperience.ota.controller.UpdaterController;
-import org.pixelexperience.ota.misc.Constants;
-import org.pixelexperience.ota.misc.StringGenerator;
-import org.pixelexperience.ota.misc.Utils;
-import org.pixelexperience.ota.model.UpdateInfo;
-import org.pixelexperience.ota.model.UpdateStatus;
+import org.zephyrus.ota.controller.UpdaterController;
+import org.zephyrus.ota.misc.Constants;
+import org.zephyrus.ota.misc.StringGenerator;
+import org.zephyrus.ota.misc.Utils;
+import org.zephyrus.ota.model.UpdateInfo;
+import org.zephyrus.ota.model.UpdateStatus;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;

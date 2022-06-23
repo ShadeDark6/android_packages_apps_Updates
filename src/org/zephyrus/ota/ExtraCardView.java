@@ -1,4 +1,4 @@
-package org.pixelexperience.ota;
+package org.zephyrus.ota;
 
 import android.content.Context;
 import android.content.res.TypedArray;

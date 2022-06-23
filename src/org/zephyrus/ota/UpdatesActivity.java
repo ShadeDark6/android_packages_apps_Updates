@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota;
+package org.zephyrus.ota;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -50,20 +50,20 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
-import org.pixelexperience.ota.controller.ABUpdateInstaller;
-import org.pixelexperience.ota.controller.UpdaterController;
-import org.pixelexperience.ota.controller.UpdaterService;
-import org.pixelexperience.ota.download.DownloadClient;
-import org.pixelexperience.ota.misc.Constants;
-import org.pixelexperience.ota.misc.Utils;
-import org.pixelexperience.ota.model.UpdateInfo;
-import org.pixelexperience.ota.model.UpdateStatus;
+import org.zephyrus.ota.controller.ABUpdateInstaller;
+import org.zephyrus.ota.controller.UpdaterController;
+import org.zephyrus.ota.controller.UpdaterService;
+import org.zephyrus.ota.download.DownloadClient;
+import org.zephyrus.ota.misc.Constants;
+import org.zephyrus.ota.misc.Utils;
+import org.zephyrus.ota.model.UpdateInfo;
+import org.zephyrus.ota.model.UpdateStatus;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import static org.pixelexperience.ota.model.UpdateStatus.UNKNOWN;
+import static org.zephyrus.ota.model.UpdateStatus.UNKNOWN;
 
 public class UpdatesActivity extends UpdatesListActivity {
 
@@ -378,7 +378,7 @@ public class UpdatesActivity extends UpdatesListActivity {
     private void downloadUpdatesList(final boolean manualRefresh) {
         final File jsonFile = Utils.getCachedUpdateList(this);
         final File jsonFileTmp = new File(jsonFile.getAbsolutePath() + UUID.randomUUID());
-        String url = Utils.getServerURL();
+        String url = Utils.getJsonURL();
         Log.d(TAG, "Checking " + url);
 
         DownloadClient.DownloadCallback callback = new DownloadClient.DownloadCallback() {

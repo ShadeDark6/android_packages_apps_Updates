@@ -107,11 +107,5 @@
     <string name="maintainer_info_title">Maintainer</string>
     <string name="donate_info_title">Donate</string>
     <string name="donate_info_summary">Support the development</string>
-    <string name="website_info_title">Website</string>
-    <string name="website_info_summary">Visit our website</string>
-    <string name="news_info_title">News</string>
-    <string name="news_info_summary">Stay informed about updates and other news</string>
-    <string name="forum_info_title">Forum</string>
-    <string name="forum_info_summary">View forum posts</string>
     <string name="error_open_url">Failed to open URL in browser</string>
 </resources>

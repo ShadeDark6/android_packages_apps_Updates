@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota.model;
+package org.zephyrus.ota.model;
 
 import java.util.ArrayList;
 
@@ -27,9 +27,6 @@ public class UpdateBase implements UpdateBaseInfo {
     private String mVersion;
     private long mFileSize;
     private String mDonateUrl;
-    private String mForumUrl;
-    private String mWebsiteUrl;
-    private String mNewsUrl;
     private ArrayList<MaintainerInfo> mMaintainers;
     private String mHash;
 
@@ -106,33 +103,6 @@ public class UpdateBase implements UpdateBaseInfo {
 
     public void setDonateUrl(String donateUrl) {
         mDonateUrl = donateUrl;
-    }
-
-    @Override
-    public String getForumUrl() {
-        return mForumUrl;
-    }
-
-    public void setForumUrl(String forumUrl) {
-        mForumUrl = forumUrl;
-    }
-
-    @Override
-    public String getWebsiteUrl() {
-        return mWebsiteUrl;
-    }
-
-    public void setWebsiteUrl(String websiteUrl) {
-        mWebsiteUrl = websiteUrl;
-    }
-
-    @Override
-    public String getNewsUrl() {
-        return mNewsUrl;
-    }
-
-    public void setNewsUrl(String newsUrl) {
-        mNewsUrl = newsUrl;
     }
 
     @Override

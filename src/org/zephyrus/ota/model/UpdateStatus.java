@@ -14,32 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.pixelexperience.ota.model;
+package org.zephyrus.ota.model;
 
-import java.util.ArrayList;
+public enum UpdateStatus {
+    UNKNOWN,
+    STARTING,
+    DOWNLOADING,
+    DOWNLOADED,
+    PAUSED,
+    DOWNLOAD_ERROR,
+    DELETED,
+    VERIFYING,
+    VERIFIED,
+    VERIFICATION_FAILED,
+    INSTALLING,
+    INSTALLATION_FAILED;
 
-public interface UpdateBaseInfo {
-    String getName();
-
-    String getDownloadId();
-
-    long getTimestamp();
-
-    String getVersion();
-
-    String getDownloadUrl();
-
-    long getFileSize();
-
-    String getDonateUrl();
-
-    String getForumUrl();
-
-    String getWebsiteUrl();
-
-    String getNewsUrl();
-
-    ArrayList<MaintainerInfo> getMaintainers();
-
-    String getHash();
+    public static final class Persistent {
+        public static final int UNKNOWN = 0;
+        public static final int STARTING_DOWNLOAD = 1;
+        public static final int DOWNLOADING = 2;
+        public static final int VERIFIED = 3;
+    }
 }

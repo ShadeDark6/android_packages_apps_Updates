@@ -1,4 +1,4 @@
-package org.pixelexperience.ota;
+package org.zephyrus.ota;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,9 +14,9 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import org.pixelexperience.ota.misc.Utils;
-import org.pixelexperience.ota.model.MaintainerInfo;
-import org.pixelexperience.ota.model.UpdateInfo;
+import org.zephyrus.ota.misc.Utils;
+import org.zephyrus.ota.model.MaintainerInfo;
+import org.zephyrus.ota.model.UpdateInfo;
 
 import java.util.ArrayList;
 
@@ -25,9 +25,6 @@ public class ExtrasFragment extends Fragment {
     private View mainView;
     private LinearLayout maintainersLayout;
     private ExtraCardView donateCard;
-    private ExtraCardView forumCard;
-    private ExtraCardView websiteCard;
-    private ExtraCardView newsCard;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,9 +32,6 @@ public class ExtrasFragment extends Fragment {
         mainView = inflater.inflate(R.layout.extras_fragment, container, false);
         maintainersLayout = mainView.findViewById(R.id.maintainers);
         donateCard = mainView.findViewById(R.id.donate_card);
-        forumCard = mainView.findViewById(R.id.forum_card);
-        websiteCard = mainView.findViewById(R.id.website_card);
-        newsCard = mainView.findViewById(R.id.news_card);
         return mainView;
     }
 
@@ -70,24 +64,6 @@ public class ExtrasFragment extends Fragment {
             donateCard.setOnClickListener(v -> openUrl(update.getDonateUrl()));
             donateCard.setClickable(true);
             donateCard.setVisibility(View.VISIBLE);
-        }
-
-        if (update.getForumUrl() != null && !update.getForumUrl().isEmpty()) {
-            forumCard.setOnClickListener(v -> openUrl(update.getForumUrl()));
-            forumCard.setClickable(true);
-            forumCard.setVisibility(View.VISIBLE);
-        }
-
-        if (update.getWebsiteUrl() != null && !update.getWebsiteUrl().isEmpty()) {
-            websiteCard.setOnClickListener(v -> openUrl(update.getWebsiteUrl()));
-            websiteCard.setClickable(true);
-            websiteCard.setVisibility(View.VISIBLE);
-        }
-
-        if (update.getNewsUrl() != null && !update.getNewsUrl().isEmpty()) {
-            newsCard.setOnClickListener(v -> openUrl(update.getNewsUrl()));
-            newsCard.setClickable(true);
-            newsCard.setVisibility(View.VISIBLE);
         }
 
     }
