@@ -290,7 +290,6 @@ public class UpdaterController {
                 }
             }else{
                 update.setStatus(UpdateStatus.UNKNOWN);
-                Utils.cleanupDownloadsDir(mContext);
                 Utils.setPersistentStatus(mContext, UpdateStatus.Persistent.UNKNOWN);
             }
         }else if (Utils.getPersistentStatus(mContext) == UpdateStatus.Persistent.DOWNLOADING && isDownloading()) {
