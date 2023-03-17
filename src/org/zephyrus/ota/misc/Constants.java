@@ -28,9 +28,9 @@ public final class Constants {
     public static final String DOWNLOAD_PATH = "/data/system_updates/";
     static final String PROP_AB_DEVICE = "ro.build.ab_update";
     static final String PROP_DEVICE = "ro.zephyrus.device";
-    static final String PROP_BUILD_VERSION = "ro.zephyrus.version";
-    static final String OTA_URL = "https://raw.githubusercontent.com/Project-Zephyrus/OTA/%s/%s/ota.json";
-    static final String CHANGELOG_URL = "https://github.com/Project-Zephyrus/OTA/blob/%s/%s/changelog_%s.txt";
-    static final String CHANGELOG_URL_LOCALE = "https://raw.githubusercontent.com/Project-Zephyrus/OTA/%s/%s/changelog_%s-%s-r%s.txt";
+    static final String PROP_BUILD_VERSION = "ro.zeph.version";
+    static final String OTA_URL = "https://raw.githubusercontent.com/Project-Zephyrus-CAF/OTA/%s/%s/ota.json";
+    static final String CHANGELOG_URL = "https://github.com/Project-Zephyrus-CAF/OTA/blob/%s/%s/changelog_%s.txt";
+    static final String CHANGELOG_URL_LOCALE = "https://raw.githubusercontent.com/Project-Zephyrus-CAF/OTA/%s/%s/changelog_%s-%s-r%s.txt";
     static final String EXPORT_PATH = "Project-Zephyrus-Updates/";
 }
