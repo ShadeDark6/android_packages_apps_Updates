@@ -191,7 +191,7 @@ public class ExtrasFragment extends Fragment {
         update.setFile(file);
         update.setFileSize(file.length());
         update.setDownloadId(Update.LOCAL_ID);
-        update.setTimestamp(timeStamp * 1000);
+        update.setTimestamp(timeStamp);
         update.setStatus(UpdateStatus.VERIFIED);
         update.setVersion(Utils.getVersion());
         return update;
