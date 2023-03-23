@@ -239,7 +239,7 @@ public class UpdatesListAdapter extends RecyclerView.Adapter<UpdatesListAdapter.
         viewHolder.mBuildName.setCompoundDrawables(null, null, null, null);
         viewHolder.mDetails.setOnClickListener(v -> {
             Utils.doHapticFeedback(mContext, mVibrator);
-            showChangelog(mUpdate.getTimestamp() / 1000);
+            showChangelog(mUpdate.getTimestamp());
         });
 
         if (activeLayout) {
