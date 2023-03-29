@@ -21,7 +21,7 @@ public final class Constants {
     public static final String AB_PAYLOAD_PROPERTIES_PATH = "payload_properties.txt";
     public static final String PREF_MOBILE_DATA_WARNING = "pref_mobile_data_warning";
     public static final String UNCRYPT_FILE_EXT = ".uncrypt";
-    public static final String PROP_BUILD_DATE = "ro.build.date.utc";
+    public static final String PROP_BUILD_DATE = "ro.zeph.date.utc";
     public static final String PROP_BUILD_TYPE = "org.zephyrus.build_type";
     public static final String PREF_CURRENT_PERSISTENT_STATUS = "current_persistent_status";
     public static final String PREF_INSTALLING_AB_ID = "installing_ab_id";
