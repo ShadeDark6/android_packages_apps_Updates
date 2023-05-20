@@ -29,7 +29,6 @@ import java.util.TimeZone;
 
 public final class StringGenerator {
 
-
     public static String getDateLocalizedUTC(Context context, int dateFormat, long unixTimestamp) {
         DateFormat f = DateFormat.getDateInstance(dateFormat, getCurrentLocale(context));
         f.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -39,6 +38,7 @@ public final class StringGenerator {
 
     public static String getChangelogDate(long unixTimestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy_MM_dd");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         Date date = new Date(unixTimestamp * 1000);
         return sdf.format(date);
     }
