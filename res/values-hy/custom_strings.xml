@@ -71,8 +71,6 @@
     <string name="update_on_mobile_data_title">Զգուշացում</string>
     <string name="checkbox_mobile_data_warning">Այլևս չցուցադրել</string>
     <string name="maintainer_info_title">Սպասարկում</string>
-    <string name="donate_info_title">Աջակցել</string>
-    <string name="donate_info_summary">Աջակցել մշակմանը</string>
     <string name="website_info_title">Վեբկայք</string>
     <string name="website_info_summary">Այցելեք մեր վեբ կայքը</string>
     <string name="news_info_title">Նորություններ</string>

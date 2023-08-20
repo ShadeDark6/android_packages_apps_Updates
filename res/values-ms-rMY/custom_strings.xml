@@ -75,8 +75,6 @@
     <string name="checkbox_mobile_data_warning">Jangan tunjukkan lagi</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Penyelenggara</string>
-    <string name="donate_info_title">Menyumbang</string>
-    <string name="donate_info_summary">Sokong pembangunan</string>
     <string name="website_info_title">Laman sesawang</string>
     <string name="website_info_summary">Kunjungi laman sesawang kami</string>
     <string name="news_info_title">Berita</string>

@@ -93,8 +93,6 @@
     <string name="update_on_mobile_data_message">Скачивание обновления по мобильной сети расходует большой объём трафика и может привести к непредвиденным расходам. Продолжить?</string>
     <string name="checkbox_mobile_data_warning">Не показывать снова</string>
     <string name="maintainer_info_title">Сопровождающий</string>
-    <string name="donate_info_title">Пожертвовать</string>
-    <string name="donate_info_summary">Поддержать разработку проекта</string>
     <string name="website_info_title">Веб-сайт</string>
     <string name="website_info_summary">Посетить наш веб-сайт</string>
     <string name="news_info_title">Новости</string>

@@ -104,8 +104,6 @@
     <string name="checkbox_mobile_data_warning">Nu se mai afișează</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Dezvoltator</string>
-    <string name="donate_info_title">Donează</string>
-    <string name="donate_info_summary">Susțineți dezvoltarea</string>
     <string name="website_info_title">Pagină Web</string>
     <string name="website_info_summary">Vizitați pagina noastră web</string>
     <string name="news_info_title">Noutăți</string>

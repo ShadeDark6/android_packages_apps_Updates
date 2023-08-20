@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Stai per scaricare un aggiornamento utilizzando i dati mobili. Ciò potrebbe comportare un utilizzo elevato dei dati. Vuoi continuare?</string>
     <string name="checkbox_mobile_data_warning">Non mostrare più</string>
     <string name="maintainer_info_title">Manutentore</string>
-    <string name="donate_info_title">Fai una donazione</string>
-    <string name="donate_info_summary">Sostieni lo sviluppo</string>
     <string name="website_info_title">Sito web</string>
     <string name="website_info_summary">Visita il nostro sito web</string>
     <string name="news_info_title">Novità</string>

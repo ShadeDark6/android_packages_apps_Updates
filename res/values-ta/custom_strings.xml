@@ -45,8 +45,6 @@
     <string name="pause_button">இடைநிறுத்து</string>
     <string name="resume_button">தொடரவும்</string>
     <string name="maintainer_info_title">பராமரிப்பாளர்</string>
-    <string name="donate_info_title">நங்கொடை</string>
-    <string name="donate_info_summary">ஆதரவு வளர்ச்சி</string>
     <string name="website_info_title">இணையதளம்</string>
     <string name="website_info_summary">எங்கள் வலைத்தளத்தில் செல்க</string>
     <string name="news_info_title">செய்தி</string>

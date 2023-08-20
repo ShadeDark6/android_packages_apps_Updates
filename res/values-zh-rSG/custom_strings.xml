@@ -98,8 +98,6 @@
     <string name="checkbox_mobile_data_warning">不再顯示</string>
     <!-- Info section -->
     <string name="maintainer_info_title">維護人員</string>
-    <string name="donate_info_title">贊助</string>
-    <string name="donate_info_summary">支援開發者</string>
     <string name="website_info_title">網站</string>
     <string name="website_info_summary">瀏覽我們的網站</string>
     <string name="news_info_title">新聞</string>

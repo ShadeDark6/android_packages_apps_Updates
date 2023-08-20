@@ -98,8 +98,6 @@
     <string name="checkbox_mobile_data_warning">다시 보지 않기</string>
     <!-- Info section -->
     <string name="maintainer_info_title">관리자</string>
-    <string name="donate_info_title">기부</string>
-    <string name="donate_info_summary">개발 지원하기</string>
     <string name="website_info_title">웹사이트</string>
     <string name="website_info_summary">웹사이트 방문</string>
     <string name="news_info_title">뉴스</string>

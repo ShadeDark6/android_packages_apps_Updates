@@ -107,8 +107,6 @@
     <string name="checkbox_mobile_data_warning">Не показывать снова</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Разработчик</string>
-    <string name="donate_info_title">Пожертвовать</string>
-    <string name="donate_info_summary">Поддержать разработку</string>
     <string name="website_info_title">Веб-сайт</string>
     <string name="website_info_summary">Посетить наш веб-сайт</string>
     <string name="news_info_title">Новости</string>

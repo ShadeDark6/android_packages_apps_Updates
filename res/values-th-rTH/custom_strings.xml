@@ -34,8 +34,6 @@
     <string name="checkbox_mobile_data_warning">ไม่ต้องแสดงอีก</string>
     <!-- Info section -->
     <string name="maintainer_info_title">ผู้ดูแล</string>
-    <string name="donate_info_title">ร่วมสนับสนุน</string>
-    <string name="donate_info_summary">สนับสนุนการพัฒนา</string>
     <string name="website_info_title">เว็บไซต์</string>
     <string name="website_info_summary">เยี่ยมชมเว็บไซต์</string>
     <string name="news_info_title">ข่าวสาร</string>

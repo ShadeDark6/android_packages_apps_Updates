@@ -90,8 +90,6 @@
     <string name="update_on_mobile_data_message">Ste pred prenosom posodobitvenega paketa z uporabo mobilnih podatkov, kar bo verjetno povzročilo visoko porabo podatkov. Ali želite nadaljevati?</string>
     <string name="checkbox_mobile_data_warning">Ne prikaži ponovno</string>
     <string name="maintainer_info_title">Vzdrževalec</string>
-    <string name="donate_info_title">Prispevaj</string>
-    <string name="donate_info_summary">Podprite razvoj</string>
     <string name="website_info_title">Spletna stran</string>
     <string name="website_info_summary">Obiščite našo spletno stran</string>
     <string name="news_info_title">Novice</string>

@@ -32,8 +32,6 @@
     <string name="checkbox_mobile_data_warning">Huwag ulit ipakita</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Taga-maintain</string>
-    <string name="donate_info_title">Mag-donate</string>
-    <string name="donate_info_summary">Suportahan ang pag-develop</string>
     <string name="website_info_title">Website</string>
     <string name="website_info_summary">Bisitahin ang website</string>
     <string name="news_info_title">Mga balita</string>

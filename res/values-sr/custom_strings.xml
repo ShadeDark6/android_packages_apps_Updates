@@ -90,8 +90,6 @@
     <string name="update_on_mobile_data_message">Преузимање надоградњи преко мобилне мреже троши доста саобраћаја и може довести до непредвиђених трошкова. Да ли желите да наставите?</string>
     <string name="checkbox_mobile_data_warning">Не приказуј поново</string>
     <string name="maintainer_info_title">Програмер</string>
-    <string name="donate_info_title">Донирај</string>
-    <string name="donate_info_summary">Подржите развој</string>
     <string name="website_info_title">Веб-сајт</string>
     <string name="website_info_summary">Посети наш веб-сајт</string>
     <string name="news_info_title">Новости</string>

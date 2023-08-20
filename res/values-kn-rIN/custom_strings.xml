@@ -50,8 +50,6 @@
     <string name="checkbox_mobile_data_warning">ಪುನಃ ತೋರಿಸಬೇಡ</string>
     <!-- Info section -->
     <string name="maintainer_info_title">ಮೆಂಟೈನರ್</string>
-    <string name="donate_info_title">ದಾನ</string>
-    <string name="donate_info_summary">ಅಭಿವೃದ್ಧಿಯನ್ನು ಬೆಂಬಲಿಸಿ</string>
     <string name="website_info_title">ವೆಬ್‌ಸೈಟ್‌</string>
     <string name="website_info_summary">ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ ಅನ್ನು ಭೇಟಿಮಾಡಿ</string>
     <string name="news_info_title">ಸುದ್ದಿ</string>

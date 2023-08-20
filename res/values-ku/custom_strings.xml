@@ -82,8 +82,6 @@
     <string name="update_on_mobile_data_message">تۆ خەریکیت بوخچەی نوێکارییەک دادەگریت لەڕێگای داتای مۆبایلەکەتەوە کە ئەمەش دەبێتە هۆی بەکارهێنانی داتایەکی زۆر. دەتەوێ بەردەوام بیت؟</string>
     <string name="checkbox_mobile_data_warning">پیشان نەدرێتەوە</string>
     <string name="maintainer_info_title">پەرەپێدەر</string>
-    <string name="donate_info_title">کۆمەککردن</string>
-    <string name="donate_info_summary">پاڵپشتیکردنی پەرەپێدەران</string>
     <string name="website_info_title">ماڵپەڕ</string>
     <string name="website_info_summary">سەردانی ماڵپەرەکەمان بکە</string>
     <string name="news_info_title">هەواڵ</string>

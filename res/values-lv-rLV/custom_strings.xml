@@ -28,8 +28,6 @@
     <!-- ETA -->
     <!-- Mobile data warning -->
     <!-- Info section -->
-    <string name="donate_info_title">Ziedot</string>
-    <string name="website_info_title">Tīmekļa vietne</string>
     <string name="news_info_title">Jaunumi</string>
     <string name="forum_info_title">Forums</string>
 </resources>

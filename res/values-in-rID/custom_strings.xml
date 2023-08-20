@@ -98,8 +98,6 @@
     <string name="checkbox_mobile_data_warning">Jangan tampilkan lagi</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Pengelola</string>
-    <string name="donate_info_title">Donasi</string>
-    <string name="donate_info_summary">Dukung pengembangan</string>
     <string name="website_info_title">Situs web</string>
     <string name="website_info_summary">Kunjungi situs web kami</string>
     <string name="news_info_title">Berita</string>

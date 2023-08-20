@@ -106,8 +106,6 @@
     <!-- Info section -->
     <string name="maintainer_info_title">Maintainer</string>
     <string name="maintainer_info_unknown">Unknown</string>
-    <string name="donate_info_title">Donate</string>
-    <string name="donate_info_summary">Support the development</string>
     <string name="group_info_title">Telegram</string>
     <string name="group_info_summary">Join to get news &amp; support</string>
     <string name="error_open_url">Failed to open URL in browser</string>

@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">თქვენ ტვირთავთ განახლებას მობილური ინტერნეტის გამოყენებიც რაც იწვევს ბევრი ინტერნეტის დახარჯვას. გსურთ გაგრძელება?</string>
     <string name="checkbox_mobile_data_warning">აღარ მაჩვენო მეორედ</string>
     <string name="maintainer_info_title">მწარმოებელი</string>
-    <string name="donate_info_title">პროექტის დახმარება</string>
-    <string name="donate_info_summary">დაეხმარეთ განვითარებას</string>
     <string name="website_info_title">ვებ გვერდი</string>
     <string name="website_info_summary">ეწვიეთ ჩვენს ვებ გვერდს</string>
     <string name="news_info_title">სიახლეები</string>

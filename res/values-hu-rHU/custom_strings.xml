@@ -34,8 +34,6 @@
     <string name="checkbox_mobile_data_warning">Ne jelenjen meg ismét</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Karbantartó</string>
-    <string name="donate_info_title">Támogatás</string>
-    <string name="donate_info_summary">A fejlesztés támogatása</string>
     <string name="website_info_title">Honlap</string>
     <string name="website_info_summary">Honlap meglátogatása</string>
     <string name="news_info_title">Hírek</string>

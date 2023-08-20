@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Büyük bir olasılıkla yüksek veri kullanımına neden olacak mobil veri kullanarak bir güncelleme paketi indirmek üzeresiniz. Devam etmek ister misiniz?</string>
     <string name="checkbox_mobile_data_warning">Tekrar gösterme</string>
     <string name="maintainer_info_title">Cihaz sorumlusu</string>
-    <string name="donate_info_title">Bağış yapın</string>
-    <string name="donate_info_summary">Geliştirmeyi destekle</string>
     <string name="website_info_title">İnternet sitesi</string>
     <string name="website_info_summary">İnternet sitemizi ziyaret edin</string>
     <string name="news_info_title">Haberler</string>

@@ -49,24 +49,6 @@
             extra_card_view:title="@string/maintainer_info_title" />
 
         <org.zephyrus.ota.ExtraCardView
-            android:id="@+id/donate_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/extra_card_layout_margin"
-            android:foreground="?attr/selectableItemBackground"
-            android:visibility="gone"
-            app:cardBackgroundColor="@color/cardview_background"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
-            app:contentPaddingBottom="16dp"
-            app:contentPaddingLeft="16dp"
-            app:contentPaddingRight="16dp"
-            app:contentPaddingTop="16dp"
-            extra_card_view:image="@drawable/ic_donate_icon"
-            extra_card_view:summary="@string/donate_info_summary"
-            extra_card_view:title="@string/donate_info_title" />
-
-        <org.zephyrus.ota.ExtraCardView
             android:id="@+id/group_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

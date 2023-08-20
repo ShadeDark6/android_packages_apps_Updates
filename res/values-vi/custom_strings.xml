@@ -84,8 +84,6 @@
     <string name="update_on_mobile_data_message">Bạn sắp tải xuống một gói cập nhật sử dụng dữ liệu di động có khả năng gây ra việc sử dụng dữ liệu cao. Bạn có muốn tiến hành không?</string>
     <string name="checkbox_mobile_data_warning">Không hiện lại</string>
     <string name="maintainer_info_title">Người duy trì</string>
-    <string name="donate_info_title">Ủng hộ</string>
-    <string name="donate_info_summary">Hỗ trợ việc phát triển</string>
     <string name="website_info_title">Trang web</string>
     <string name="website_info_summary">Truy cập trang web của chúng tôi</string>
     <string name="news_info_title">Tin tức</string>

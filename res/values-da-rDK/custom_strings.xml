@@ -28,8 +28,6 @@
     <!-- Mobile data warning -->
     <!-- Info section -->
     <string name="maintainer_info_title">Vedligeholder</string>
-    <string name="donate_info_title">Donér</string>
-    <string name="donate_info_summary">Støt udviklingen</string>
     <string name="website_info_title">Hjemmeside</string>
     <string name="website_info_summary">Besøg vores hjemmeside</string>
     <string name="news_info_title">Nyheder</string>

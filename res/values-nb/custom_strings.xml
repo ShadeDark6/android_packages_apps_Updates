@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Du er i ferd med å laste ned en oppdateringspakke ved bruk av mobildata, noe som antagelig vil forårsake høy databruk. Ønsker du å fortsette?</string>
     <string name="checkbox_mobile_data_warning">Ikke vis igjen</string>
     <string name="maintainer_info_title">Vedlikeholder</string>
-    <string name="donate_info_title">Doner</string>
-    <string name="donate_info_summary">Støtt utviklingen</string>
     <string name="website_info_title">Nettside</string>
     <string name="website_info_summary">Besøk nettsiden vår</string>
     <string name="news_info_title">Nyheter</string>

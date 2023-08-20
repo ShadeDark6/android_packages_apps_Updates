@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Esteu a punt de baixar un paquet d\'actualització amb dades mòbils que probablement generarà un alt ús de dades. Voleu continuar?</string>
     <string name="checkbox_mobile_data_warning">No mostrar de nou</string>
     <string name="maintainer_info_title">Mantenidor</string>
-    <string name="donate_info_title">Donar</string>
-    <string name="donate_info_summary">Recolzar el desenvolupament</string>
     <string name="website_info_title">Lloc web</string>
     <string name="website_info_summary">Visiteu el nostre lloc web</string>
     <string name="news_info_title">Notícies</string>

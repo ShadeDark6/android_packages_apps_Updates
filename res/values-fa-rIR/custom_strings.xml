@@ -34,8 +34,6 @@
     <string name="checkbox_mobile_data_warning">دوباره نمایش نده</string>
     <!-- Info section -->
     <string name="maintainer_info_title">برقرار نگه‌دارنده</string>
-    <string name="donate_info_title">کمک مالی</string>
-    <string name="donate_info_summary">از توسعه رام حمایت کنید</string>
     <string name="website_info_title">وب‌سایت</string>
     <string name="website_info_summary">از وب‌سایت ما دیدن کنید</string>
     <string name="news_info_title">اخبار</string>

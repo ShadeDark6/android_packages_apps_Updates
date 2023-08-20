@@ -96,8 +96,6 @@
     <string name="checkbox_mobile_data_warning">Niet opnieuw tonen</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Onderhouder</string>
-    <string name="donate_info_title">Doneer</string>
-    <string name="donate_info_summary">Steun de ontwikkeling</string>
     <string name="website_info_title">Website</string>
     <string name="website_info_summary">Bezoek onze website</string>
     <string name="news_info_title">Nieuws</string>

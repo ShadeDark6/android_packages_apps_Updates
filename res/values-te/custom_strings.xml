@@ -16,8 +16,6 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="maintainer_info_title">సంరక్షకునికి</string>
-    <string name="donate_info_title">దానం</string>
-    <string name="donate_info_summary">మద్దతు మెరుగుపడింది</string>
     <string name="website_info_title">వెబ్సైట్</string>
     <string name="website_info_summary">మా వెబ్సైట్ను సందర్శించండి</string>
     <string name="news_info_title">న్యూస్</string>

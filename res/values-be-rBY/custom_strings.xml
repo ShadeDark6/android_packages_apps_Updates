@@ -107,8 +107,6 @@
     <string name="checkbox_mobile_data_warning">Больш не паказваць</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Суправаджальнік</string>
-    <string name="donate_info_title">Ахвяраваць</string>
-    <string name="donate_info_summary">Падтрымаць распрацоўку</string>
     <string name="website_info_title">Вэб-сайт</string>
     <string name="website_info_summary">Наведайце наш сайт</string>
     <string name="news_info_title">Навіны</string>

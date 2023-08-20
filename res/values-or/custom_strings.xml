@@ -83,8 +83,6 @@
     <string name="update_on_mobile_data_message">ଆପଣ ମୋବାଇଲ୍ ଡାଟା ବ୍ୟବହାର କରି ଏକ ଅପଡେଟ୍ ପ୍ୟାକେଜ୍ ଡାଉନଲୋଡ୍ କରିବାକୁ ଯାଉଛନ୍ତି ଯାହା ଉଚ୍ଚ ଡାଟା ବ୍ୟବହାର ହେବାର ସମ୍ଭାବନା | ଆପଣ ଆଗକୁ ବ to ିବାକୁ ଚାହୁଁଛନ୍ତି କି?</string>
     <string name="checkbox_mobile_data_warning">ପୁନର୍ବାର ଦେଖାନ୍ତୁ ନାହିଁ |</string>
     <string name="maintainer_info_title">ରକ୍ଷଣାବେକ୍ଷଣକାରୀ</string>
-    <string name="donate_info_title">ଦାନ କରନ୍ତୁ</string>
-    <string name="donate_info_summary">ବିକାଶକୁ ସମର୍ଥନ କରନ୍ତୁ</string>
     <string name="website_info_title">ୱେବସାଇଟ୍</string>
     <string name="website_info_summary">ଆମର ୱେବସାଇଟ୍ ପରିଦର୍ଶନ କରନ୍ତୁ</string>
     <string name="news_info_title">ସମ୍ବାଦ |</string>

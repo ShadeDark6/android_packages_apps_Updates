@@ -113,8 +113,6 @@
     <string name="checkbox_mobile_data_warning">لا تظهر مرة أخرى</string>
     <!-- Info section -->
     <string name="maintainer_info_title">المشرف</string>
-    <string name="donate_info_title">التبرع</string>
-    <string name="donate_info_summary">إدعم المطور</string>
     <string name="website_info_title">الموقع</string>
     <string name="website_info_summary">زر موقعنا</string>
     <string name="news_info_title">الأخبار</string>

@@ -86,8 +86,6 @@
     <string name="update_on_mobile_data_message">Estás a punto de descargar un paquete de actualización a través da conexión de datos móbeis o que xerará un maior consumo de datos. Tes a certeza de querer continuar?</string>
     <string name="checkbox_mobile_data_warning">Non volver a amosar</string>
     <string name="maintainer_info_title">Mantedor</string>
-    <string name="donate_info_title">Doazón</string>
-    <string name="donate_info_summary">Apoie o desarollador</string>
     <string name="website_info_title">Sitio web</string>
     <string name="website_info_summary">Visita o noso sitio web</string>
     <string name="news_info_title">Novas</string>

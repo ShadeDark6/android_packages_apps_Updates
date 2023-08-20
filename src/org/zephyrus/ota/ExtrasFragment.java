@@ -52,13 +52,11 @@ public class ExtrasFragment extends Fragment {
     private View mainView;
     private ExtraCardView localUpdateCard;
     private ExtraCardView maintainerCard;
-    private ExtraCardView donateCard;
     private ExtraCardView groupCard;
 
     private String[] deviceList;
     private String[] maintainerNameList;
     private String[] maintainerLinkList;
-    private String[] donateList;
     private String[] groupList;
     private int device_index = -1;
 
@@ -87,7 +85,6 @@ public class ExtrasFragment extends Fragment {
         mainView = inflater.inflate(R.layout.extras_fragment, container, false);
         localUpdateCard = mainView.findViewById(R.id.local_update_card);
         maintainerCard = mainView.findViewById(R.id.maintainer_card);
-        donateCard = mainView.findViewById(R.id.donate_card);
         groupCard = mainView.findViewById(R.id.group_card);
 
         deviceList = getContext().getResources().getStringArray(
@@ -96,8 +93,6 @@ public class ExtrasFragment extends Fragment {
                 R.array.config_maintainer_name_list);
         maintainerLinkList = getContext().getResources().getStringArray(
                 R.array.config_maintainer_link_list);
-        donateList = getContext().getResources().getStringArray(
-                R.array.config_donate_list);
         groupList = getContext().getResources().getStringArray(
                 R.array.config_group_list);
         device_index = getDeviceIndex();
@@ -335,13 +330,6 @@ public class ExtrasFragment extends Fragment {
             });
             maintainerCard.setSummary(maintainerNameList[device_index]);
             maintainerCard.setClickable(true);
-
-            donateCard.setOnClickListener(v -> {
-                Utils.doHapticFeedback(getContext(), mVibrator);
-                openUrl(donateList[device_index]);
-            });
-            donateCard.setClickable(true);
-            donateCard.setVisibility(View.VISIBLE);
 
             groupCard.setOnClickListener(v -> {
                 Utils.doHapticFeedback(getContext(), mVibrator);

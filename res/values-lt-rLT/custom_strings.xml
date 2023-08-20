@@ -36,8 +36,6 @@
     <string name="checkbox_mobile_data_warning">Daugiau nerodyti</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Kūrėjas/Prižiūrėtojas</string>
-    <string name="donate_info_title">Paaukoti</string>
-    <string name="donate_info_summary">Paremti programos vystymą</string>
     <string name="website_info_title">Svetainė</string>
     <string name="website_info_summary">Aplankyti svetainę</string>
     <string name="news_info_title">Naujienos</string>

@@ -107,8 +107,6 @@
     <string name="checkbox_mobile_data_warning">Ne prikaži ponovno</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Vzdrževalec</string>
-    <string name="donate_info_title">Prispevaj</string>
-    <string name="donate_info_summary">Podprite razvoj</string>
     <string name="website_info_title">Spletna stran</string>
     <string name="website_info_summary">Obiščite našo spletno stran</string>
     <string name="news_info_title">Novice</string>

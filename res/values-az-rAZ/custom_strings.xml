@@ -89,8 +89,6 @@
     <string name="checkbox_mobile_data_warning">Bir də göstərmə</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Cihaz tərtibatçısı</string>
-    <string name="donate_info_title">İanə et</string>
-    <string name="donate_info_summary">İnkişaf Etdirməni Dəstəklə</string>
     <string name="website_info_title">Vebsayt</string>
     <string name="website_info_summary">Veb saytımıza baş çəkin</string>
     <string name="news_info_title">Xəbərlər</string>

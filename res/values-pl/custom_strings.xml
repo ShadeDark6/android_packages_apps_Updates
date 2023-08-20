@@ -93,8 +93,6 @@
     <string name="update_on_mobile_data_message">Za chwilę pobierzesz pakiet aktualizacji przy użyciu danych mobilnych, co prawdopodobnie spowoduje wysokie zużycie danych. Czy chcesz kontynuować?</string>
     <string name="checkbox_mobile_data_warning">Nie pokazuj ponownie</string>
     <string name="maintainer_info_title">Opiekun</string>
-    <string name="donate_info_title">Dotacja</string>
-    <string name="donate_info_summary">Wesprzyj rozwój programu</string>
     <string name="website_info_title">Strona</string>
     <string name="website_info_summary">Odwiedź naszą stronę</string>
     <string name="news_info_title">Nowości</string>

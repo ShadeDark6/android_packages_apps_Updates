@@ -108,8 +108,6 @@
     <string name="checkbox_mobile_data_warning">Znovu nezobrazovat</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Správce</string>
-    <string name="donate_info_title">Přispět</string>
-    <string name="donate_info_summary">Podpořte vývoj</string>
     <string name="website_info_title">Webová stránka</string>
     <string name="website_info_summary">Navštivte naše webové stránky</string>
     <string name="news_info_title">Novinky</string>

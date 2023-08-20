@@ -93,8 +93,6 @@
     <string name="update_on_mobile_data_message">Ви збираєтеся завантажити пакет оновлення за допомогою мобільної мережі, що може призвести до надмірної витрати тарифного пакету даних. Дійсно хочете продовжити?</string>
     <string name="checkbox_mobile_data_warning">Більше не показувати</string>
     <string name="maintainer_info_title">Розробники</string>
-    <string name="donate_info_title">Підтримати проект</string>
-    <string name="donate_info_summary">Підтримати розробку</string>
     <string name="website_info_title">Веб-сайт</string>
     <string name="website_info_summary">Відвідати сайт</string>
     <string name="news_info_title">Новини</string>

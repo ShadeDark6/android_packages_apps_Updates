@@ -84,8 +84,6 @@
     <string name="update_on_mobile_data_message">Anda akan memuat turun pakej kemaskini menggunakan data mudah alih yang akan mengakibatkan penggunaan data yang tinggi. Ingin teruskan?</string>
     <string name="checkbox_mobile_data_warning">Jangan tunjukkan lagi</string>
     <string name="maintainer_info_title">Penyelenggara</string>
-    <string name="donate_info_title">Menyumbang</string>
-    <string name="donate_info_summary">Sokong pembangunan</string>
     <string name="website_info_title">Laman sesawang</string>
     <string name="website_info_summary">Kunjungi laman sesawang kami</string>
     <string name="news_info_title">Berita</string>

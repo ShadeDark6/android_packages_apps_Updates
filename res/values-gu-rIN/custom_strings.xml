@@ -50,8 +50,6 @@
     <string name="checkbox_mobile_data_warning">ફરીથી ના બતાવશો</string>
     <!-- Info section -->
     <string name="maintainer_info_title">જાળવનાર</string>
-    <string name="donate_info_title">બક્ષિસ આપો</string>
-    <string name="donate_info_summary">વિકાસને સપોર્ટ કરો</string>
     <string name="website_info_title">વેબસાઇટ</string>
     <string name="website_info_summary">અમારી વેબસાઇટની મુલાકાત લો</string>
     <string name="news_info_title">સમાચાર</string>

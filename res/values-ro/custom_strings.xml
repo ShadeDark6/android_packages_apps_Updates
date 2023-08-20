@@ -90,8 +90,6 @@
     <string name="update_on_mobile_data_message">Sunteți pe cale de a descărca un pachet de actualizare folosind datele mobile care, probabil, vor provoca o utilizare mare de date. Doriți să continuați?</string>
     <string name="checkbox_mobile_data_warning">Nu se mai afișează</string>
     <string name="maintainer_info_title">Dezvoltator</string>
-    <string name="donate_info_title">Donează</string>
-    <string name="donate_info_summary">Susțineți dezvoltarea</string>
     <string name="website_info_title">Pagină Web</string>
     <string name="website_info_summary">Vizitați pagina noastră web</string>
     <string name="news_info_title">Noutăți</string>

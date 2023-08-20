@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Pokušavate da preuzmete ažuriranje preko mobilnih podataka što može da vas skupo košta. Želite da nastavite?</string>
     <string name="checkbox_mobile_data_warning">Ne prikazuj ponovo</string>
     <string name="maintainer_info_title">Osoba koja održava</string>
-    <string name="donate_info_title">Doniraj</string>
-    <string name="donate_info_summary">Pomozi razvoj ove aplikacije</string>
     <string name="website_info_title">Web sajt</string>
     <string name="website_info_summary">Posjetite našu web stranicu</string>
     <string name="news_info_title">Vijesti</string>

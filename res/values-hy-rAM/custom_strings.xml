@@ -84,8 +84,6 @@
     <string name="checkbox_mobile_data_warning">Այլևս չցուցադրել</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Սպասարկում</string>
-    <string name="donate_info_title">Աջակցել</string>
-    <string name="donate_info_summary">Աջակցել մշակմանը</string>
     <string name="website_info_title">Վեբկայք</string>
     <string name="website_info_summary">Այցելեք մեր վեբ կայքը</string>
     <string name="news_info_title">Նորություններ</string>

@@ -100,8 +100,6 @@
     <string name="update_on_mobile_data_message">أنت على وشك أن تقوم بتنزيل حزمة تحديث باستخدام البيانات مما سيتسبب في استخدام عالي للبيانات. هل تريد المتابعة؟</string>
     <string name="checkbox_mobile_data_warning">لا تظهر مرة أخرى</string>
     <string name="maintainer_info_title">المطور</string>
-    <string name="donate_info_title">التبرع</string>
-    <string name="donate_info_summary">إدعم التطوير</string>
     <string name="website_info_title">الموقع</string>
     <string name="website_info_summary">زر موقعنا</string>
     <string name="news_info_title">الأخبار</string>

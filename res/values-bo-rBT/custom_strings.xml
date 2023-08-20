@@ -86,8 +86,6 @@
     <string name="checkbox_mobile_data_warning">བསྐྱར་འདྲི་མ་བྱེད།</string>
     <!-- Info section -->
     <string name="maintainer_info_title">སྲུང་འཛིན་པ།</string>
-    <string name="donate_info_title">ཞལ་འདེབས།</string>
-    <string name="donate_info_summary">གསར་སྤེལ་ལ་རྒྱབ་སྐྱོར་བྱེད་པ།</string>
     <string name="website_info_title">དྲ་ཚིགས།</string>
     <string name="website_info_summary">ངེད་ཚོའི་དྲ་ཚིགས་ལ་གཟིགས་པ།</string>
     <string name="news_info_title">གསར་འགྱུར།</string>

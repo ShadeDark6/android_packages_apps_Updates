@@ -78,8 +78,6 @@
     <string name="checkbox_mobile_data_warning">Ne prikazuj ponovno</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Održavatelj</string>
-    <string name="donate_info_title">Doniraj</string>
-    <string name="donate_info_summary">Podrži razvoj</string>
     <string name="website_info_title">Web stranica</string>
     <string name="website_info_summary">Posjeti našu web stranicu</string>
     <string name="news_info_title">Vijesti</string>

@@ -84,8 +84,6 @@
     <string name="checkbox_mobile_data_warning">Terġax turi</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Maintainer</string>
-    <string name="donate_info_title">Donatja</string>
-    <string name="donate_info_summary">Appoġġja l-iżvilupp</string>
     <string name="website_info_title">Sit tal-Web</string>
     <string name="website_info_summary">Żur il-websajt tagħna</string>
     <string name="news_info_title">Aħbarijiet</string>

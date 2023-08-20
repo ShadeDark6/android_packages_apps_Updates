@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Sie sind dabei ein Software-Update über das Mobilfunknetz herunterzuladen, was zu einem hohen Datenverbrauch führen kann. Möchten Sie fortfahren?</string>
     <string name="checkbox_mobile_data_warning">Nicht mehr anzeigen</string>
     <string name="maintainer_info_title">Betreuer</string>
-    <string name="donate_info_title">Spenden</string>
-    <string name="donate_info_summary">Unterstützen Sie die Entwicklung</string>
     <string name="website_info_title">Webseite</string>
     <string name="website_info_summary">Besuchen Sie unsere Webseite</string>
     <string name="news_info_title">Neuigkeiten</string>

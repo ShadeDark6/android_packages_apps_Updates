@@ -101,8 +101,6 @@
     <string name="checkbox_mobile_data_warning">Non volver a amosar</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Mantedor</string>
-    <string name="donate_info_title">Doazón</string>
-    <string name="donate_info_summary">Apoie o desarollador</string>
     <string name="website_info_title">Sitio web</string>
     <string name="website_info_summary">Visita o noso sitio web</string>
     <string name="news_info_title">Novas</string>

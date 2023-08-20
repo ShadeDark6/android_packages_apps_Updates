@@ -87,8 +87,6 @@
     <string name="update_on_mobile_data_message">Você está prestes a fazer o download de um pacote de atualização usando os dados móveis que provavelmente causará um alto consumo de dados. Gostaria de continuar?</string>
     <string name="checkbox_mobile_data_warning">Não mostrar novamente</string>
     <string name="maintainer_info_title">Mantenedor</string>
-    <string name="donate_info_title">Doar</string>
-    <string name="donate_info_summary">Apoie o desenvolvimento</string>
     <string name="website_info_title">Website</string>
     <string name="website_info_summary">Visite o website do projeto</string>
     <string name="news_info_title">Notícias</string>

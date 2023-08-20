@@ -74,8 +74,6 @@
     <string name="checkbox_mobile_data_warning">Більше не показувати</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Розробники</string>
-    <string name="donate_info_title">Підтримати проект</string>
-    <string name="donate_info_summary">Підтримати розробку</string>
     <string name="website_info_title">Веб-сайт</string>
     <string name="website_info_summary">Відвідати наш веб-сайт</string>
     <string name="news_info_title">Новини</string>

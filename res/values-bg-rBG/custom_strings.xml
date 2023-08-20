@@ -101,8 +101,6 @@
     <string name="checkbox_mobile_data_warning">Не показвай отново</string>
     <!-- Info section -->
     <string name="maintainer_info_title">Отговорник</string>
-    <string name="donate_info_title">Даряване</string>
-    <string name="donate_info_summary">Подкрепете разработката</string>
     <string name="website_info_title">Уебсайт</string>
     <string name="website_info_summary">Посетете нашия уебсайт</string>
     <string name="news_info_title">Новини</string>

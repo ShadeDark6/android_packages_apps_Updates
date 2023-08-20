@@ -84,8 +84,6 @@
     <string name="update_on_mobile_data_message">モバイルデータ通信でアップデートプログラムをダウンロードするとデータ使用量が増加する可能性があります。続行しますか?</string>
     <string name="checkbox_mobile_data_warning">再び表示しない</string>
     <string name="maintainer_info_title">メンテナ</string>
-    <string name="donate_info_title">寄付</string>
-    <string name="donate_info_summary">開発を支援する</string>
     <string name="website_info_title">ウェブサイト</string>
     <string name="website_info_summary">ウェブサイトを表示する</string>
     <string name="news_info_title">ニュース</string>
