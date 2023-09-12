@@ -1,4 +1,4 @@
-package org.zephyrus.ota;
+package org.neoteric.ota;
 
 import static android.provider.OpenableColumns.DISPLAY_NAME;
 
@@ -22,12 +22,12 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import org.zephyrus.ota.controller.UpdaterController;
-import org.zephyrus.ota.misc.Utils;
-import org.zephyrus.ota.model.Update;
-import org.zephyrus.ota.model.UpdateStatus;
+import org.neoteric.ota.controller.UpdaterController;
+import org.neoteric.ota.misc.Utils;
+import org.neoteric.ota.model.Update;
+import org.neoteric.ota.model.UpdateStatus;
 
-import org.zephyrus.ota.R;
+import org.neoteric.ota.R;
 
 import java.io.File;
 import java.io.FileInputStream;

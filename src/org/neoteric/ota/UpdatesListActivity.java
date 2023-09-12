@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zephyrus.ota.model;
+package org.neoteric.ota;
 
-import java.io.File;
+import androidx.appcompat.app.AppCompatActivity;
 
-public interface UpdateInfo extends UpdateBaseInfo {
-    UpdateStatus getStatus();
+public abstract class UpdatesListActivity extends AppCompatActivity {
+    public abstract void showSnackbar(int stringId, int duration);
 
-    File getFile();
-
-    long getFileSize();
+    public abstract void showSnackbar(String text, int duration);
 }

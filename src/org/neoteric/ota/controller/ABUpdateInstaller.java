@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zephyrus.ota.controller;
+package org.neoteric.ota.controller;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,10 +27,10 @@ import android.util.Log;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 
-import org.zephyrus.ota.misc.Constants;
-import org.zephyrus.ota.misc.Utils;
-import org.zephyrus.ota.model.Update;
-import org.zephyrus.ota.model.UpdateStatus;
+import org.neoteric.ota.misc.Constants;
+import org.neoteric.ota.misc.Utils;
+import org.neoteric.ota.model.Update;
+import org.neoteric.ota.model.UpdateStatus;
 
 import java.io.BufferedReader;
 import java.io.File;

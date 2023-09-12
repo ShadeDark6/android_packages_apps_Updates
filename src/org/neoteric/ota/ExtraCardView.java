@@ -1,4 +1,4 @@
-package org.zephyrus.ota;
+package org.neoteric.ota;
 
 import android.content.Context;
 import android.content.res.TypedArray;

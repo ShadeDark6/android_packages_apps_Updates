@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <org.zephyrus.ota.ExtraCardView
+        <org.neoteric.ota.ExtraCardView
             android:id="@+id/local_update_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             extra_card_view:title="@string/local_update_title" />
 
 
-        <org.zephyrus.ota.ExtraCardView
+        <org.neoteric.ota.ExtraCardView
             android:id="@+id/maintainer_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             extra_card_view:image="@drawable/ic_maintainers_icon"
             extra_card_view:title="@string/maintainer_info_title" />
 
-        <org.zephyrus.ota.ExtraCardView
+        <org.neoteric.ota.ExtraCardView
             android:id="@+id/group_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

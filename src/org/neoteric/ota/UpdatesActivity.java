@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zephyrus.ota;
+package org.neoteric.ota;
 
 import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
@@ -50,22 +50,22 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
-import org.zephyrus.ota.ExtrasFragment.UpdateListener;
-import org.zephyrus.ota.controller.ABUpdateInstaller;
-import org.zephyrus.ota.controller.UpdaterController;
-import org.zephyrus.ota.controller.UpdaterService;
-import org.zephyrus.ota.download.DownloadClient;
-import org.zephyrus.ota.misc.Constants;
-import org.zephyrus.ota.misc.Utils;
-import org.zephyrus.ota.model.Update;
-import org.zephyrus.ota.model.UpdateInfo;
-import org.zephyrus.ota.model.UpdateStatus;
+import org.neoteric.ota.ExtrasFragment.UpdateListener;
+import org.neoteric.ota.controller.ABUpdateInstaller;
+import org.neoteric.ota.controller.UpdaterController;
+import org.neoteric.ota.controller.UpdaterService;
+import org.neoteric.ota.download.DownloadClient;
+import org.neoteric.ota.misc.Constants;
+import org.neoteric.ota.misc.Utils;
+import org.neoteric.ota.model.Update;
+import org.neoteric.ota.model.UpdateInfo;
+import org.neoteric.ota.model.UpdateStatus;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-import static org.zephyrus.ota.model.UpdateStatus.UNKNOWN;
+import static org.neoteric.ota.model.UpdateStatus.UNKNOWN;
 
 public class UpdatesActivity extends UpdatesListActivity implements UpdateListener {
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zephyrus.ota;
+package org.neoteric.ota;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,13 +23,13 @@ import android.content.SharedPreferences;
 
 import androidx.preference.PreferenceManager;
 
-import org.zephyrus.ota.misc.Constants;
-import org.zephyrus.ota.misc.Utils;
+import org.neoteric.ota.misc.Constants;
+import org.neoteric.ota.misc.Utils;
 
 public class UpdaterReceiver extends BroadcastReceiver {
 
     public static final String ACTION_INSTALL_REBOOT =
-            "org.zephyrus.ota.action.INSTALL_REBOOT";
+            "org.neoteric.ota.action.INSTALL_REBOOT";
 
     @Override
     public void onReceive(Context context, Intent intent) {

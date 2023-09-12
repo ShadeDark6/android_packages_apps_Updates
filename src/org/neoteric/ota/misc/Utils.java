@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.zephyrus.ota.misc;
+package org.neoteric.ota.misc;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -37,11 +37,11 @@ import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.zephyrus.ota.controller.UpdaterService;
-import org.zephyrus.ota.model.Update;
-import org.zephyrus.ota.model.UpdateBaseInfo;
-import org.zephyrus.ota.model.UpdateInfo;
-import org.zephyrus.ota.model.UpdateStatus;
+import org.neoteric.ota.controller.UpdaterService;
+import org.neoteric.ota.model.Update;
+import org.neoteric.ota.model.UpdateBaseInfo;
+import org.neoteric.ota.model.UpdateInfo;
+import org.neoteric.ota.model.UpdateStatus;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -379,7 +379,7 @@ public class Utils {
         try {
             URL getUrl = new URL(url);
             HttpURLConnection conn = (HttpURLConnection) getUrl.openConnection();
-            conn.setRequestProperty("User-Agent", "org.zephyrus.ota");
+            conn.setRequestProperty("User-Agent", "org.neoteric.ota");
             conn.setConnectTimeout(3000);
             conn.connect();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
