@@ -24,6 +24,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ServiceInfo;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -223,7 +224,8 @@ public class UpdaterService extends Service {
                 mNotificationBuilder.setSmallIcon(android.R.drawable.stat_sys_download);
                 mNotificationBuilder.setOngoing(true);
                 mNotificationBuilder.setAutoCancel(false);
-                startForeground(NOTIFICATION_ID, mNotificationBuilder.build());
+                startForeground(NOTIFICATION_ID, mNotificationBuilder.build(),
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
                 mNotificationManager.notify(NOTIFICATION_ID, mNotificationBuilder.build());
                 break;
             }
@@ -330,7 +332,8 @@ public class UpdaterService extends Service {
                 setNotificationTitle(text);
                 mNotificationBuilder.setOngoing(true);
                 mNotificationBuilder.setAutoCancel(false);
-                startForeground(NOTIFICATION_ID, mNotificationBuilder.build());
+                startForeground(NOTIFICATION_ID, mNotificationBuilder.build(),
+                        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE);
                 mNotificationManager.notify(NOTIFICATION_ID, mNotificationBuilder.build());
                 break;
             }
