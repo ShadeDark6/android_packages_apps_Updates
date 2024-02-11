@@ -1,0 +1,53 @@
+//
+// Copyright (C) 2022-2023 The LineageOS Project
+// Copyright (C) 2024 The Nameless-AOSP Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "Updates",
+    certificate: "platform",
+    defaults: ["SettingsLibDefaults"],
+    platform_apis: true,
+    privileged: true,
+    required: [
+        "privapp_whitelist_org.neoteric.ota",
+        "default-permissions_org.neoteric.ota",
+    ],
+    srcs: [
+        "src/**/*.java",
+    ],
+    system_ext_specific: true,
+    static_libs: [
+        "androidx.appcompat_appcompat",
+        "androidx.cardview_cardview",
+        "androidx.localbroadcastmanager_localbroadcastmanager",
+        "androidx.preference_preference",
+        "androidx.recyclerview_recyclerview",
+        "com.google.android.material_material",
+        "gson",
+    ],
+}
+
+java_import {
+    name: "gson",
+    jars: ["libs/gson.jar"],
+    sdk_version: "current",
+}
+
+prebuilt_etc {
+    name: "privapp_whitelist_org.neoteric.ota",
+    system_ext_specific: true,
+    sub_dir: "permissions",
+    src: "privapp_whitelist_org.neoteric.ota.xml",
+    filename_from_src: true,
+}
+
+prebuilt_etc {
+    name: "default-permissions_org.neoteric.ota",
+    system_ext_specific: true,
+    sub_dir: "default-permissions",
+    src: "default-permissions_org.neoteric.ota.xml",
+    filename_from_src: true,
+}
