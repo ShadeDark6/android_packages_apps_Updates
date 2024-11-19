@@ -11,7 +11,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,8 +35,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.time.format.DateTimeFormatter;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -47,7 +51,6 @@ public class ExtrasFragment extends Fragment {
     private static final String TAG = "ExtrasFragment";
     private static final String MIME_ZIP = "application/zip";
     private static final String METADATA_PATH = "META-INF/com/android/metadata";
-    private static final String METADATA_TIMESTAMP_KEY = "post-timestamp=";
 
     private View mainView;
     private ExtraCardView localUpdateCard;
@@ -59,8 +62,6 @@ public class ExtrasFragment extends Fragment {
     private String[] maintainerLinkList;
     private String[] groupList;
     private int device_index = -1;
-
-    private Vibrator mVibrator;
 
     private Thread workingThread;
 
@@ -96,8 +97,6 @@ public class ExtrasFragment extends Fragment {
         groupList = getContext().getResources().getStringArray(
                 R.array.config_group_list);
         device_index = getDeviceIndex();
-
-        mVibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         return mainView;
     }
@@ -180,8 +179,16 @@ public class ExtrasFragment extends Fragment {
     }
 
     private Update buildLocalUpdate(File file, String fileName) {
-        final long timeStamp = getTimeStamp(file);
         final Update update = new Update();
+        String regex = "\\d{8}_\\d{6}";
+        Matcher matcher = Pattern.compile(regex).matcher(fileName);
+        long timeStamp = Instant.now().getEpochSecond();
+        if (matcher.find()) {
+            String timeStr = matcher.group();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").withZone(ZoneOffset.UTC);
+            Instant instant = Instant.from(dtf.parse(timeStr));
+            timeStamp = instant.getEpochSecond();
+        }
         update.setName(fileName);
         update.setFile(file);
         update.setFileSize(file.length());
@@ -190,28 +197,6 @@ public class ExtrasFragment extends Fragment {
         update.setStatus(UpdateStatus.VERIFIED);
         update.setVersion(Utils.getVersion());
         return update;
-    }
-
-    private long getTimeStamp(File file) {
-        try {
-            final String metadataContent = readZippedFile(file, METADATA_PATH);
-            final String[] lines = metadataContent.split("\n");
-            for (String line : lines) {
-                if (!line.startsWith(METADATA_TIMESTAMP_KEY)) {
-                    continue;
-                }
-
-                final String timeStampStr = line.replace(METADATA_TIMESTAMP_KEY, "");
-                return Long.parseLong(timeStampStr);
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Failed to read date from local update zip package", e);
-        } catch (NumberFormatException e) {
-            Log.e(TAG, "Failed to parse timestamp number from zip metadata file", e);
-        }
-
-        Log.e(TAG, "Couldn't find timestamp in zip file, falling back to $now");
-        return System.currentTimeMillis();
     }
 
     private String readZippedFile(File file, String path) throws IOException {
@@ -308,7 +293,6 @@ public class ExtrasFragment extends Fragment {
 
     void updatePrefs() {
         localUpdateCard.setOnClickListener(v -> {
-            Utils.doHapticFeedback(getContext(), mVibrator);
             final UpdaterController updateController = UpdaterController.getInstance(getContext());
             if (updateController.isInstallingUpdate() ||
                     updateController.isDownloading()) {
@@ -325,14 +309,12 @@ public class ExtrasFragment extends Fragment {
 
         if (device_index != -1) {
             maintainerCard.setOnClickListener(v -> {
-                Utils.doHapticFeedback(getContext(), mVibrator);
                 openUrl(maintainerLinkList[device_index]);
             });
             maintainerCard.setSummary(maintainerNameList[device_index]);
             maintainerCard.setClickable(true);
 
             groupCard.setOnClickListener(v -> {
-                Utils.doHapticFeedback(getContext(), mVibrator);
                 openUrl(groupList[device_index]);
             });
             groupCard.setClickable(true);
