@@ -479,6 +479,12 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
     }
 
     private void handleStatusChange(UpdateStatus status) {
+        if (mUpdaterService == null 
+            || mUpdaterService.getUpdaterController() == null
+            || mUpdaterService.getUpdaterController().getCurrentUpdate() == null
+            || mUpdaterService.getUpdaterController().getCurrentUpdate().getDownloadId() == null) {
+            return;
+        }
         if (mUpdaterService.getUpdaterController().getCurrentUpdate().getDownloadId().equals(Update.LOCAL_ID)) {
             return;
         }
