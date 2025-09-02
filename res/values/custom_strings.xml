@@ -15,7 +15,7 @@
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- App name -->
-    <string name="app_name">System update</string>
+    <string name="app_name">System updates</string>
 
     <!-- Notifications -->
     <string name="export_channel_title">Export completion</string>
@@ -64,7 +64,6 @@
     <string name="reboot">Reboot</string>
     <string name="reboot_needed_dialog_title">Restart needed</string>
     <string name="reboot_needed_dialog_summary">To complete the installation of the update, your device needs to be restarted.\n\nIf you want to keep magisk installed, please click \'cancel\' and flash magisk to the new slot before reboot.\n\nDo you want to restart now?</string>
-    <string name="details_button">Changelog</string>
 
     <!-- Installation -->
     <string name="apply_update_dialog_title">Apply update</string>
@@ -106,7 +105,9 @@
     <!-- Info section -->
     <string name="maintainer_info_title">Maintainer</string>
     <string name="maintainer_info_unknown">Unknown</string>
-    <string name="group_info_title">Telegram</string>
+    <string name="donate_info_title">Donate</string>
+    <string name="donate_info_summary">Support the development</string>
+    <string name="group_info_title">Support group</string>
     <string name="group_info_summary">Join to get news &amp; support</string>
     <string name="error_open_url">Failed to open URL in browser</string>
 
@@ -123,6 +124,4 @@
     <string name="fetch_changelog_failed">Failed to fetch changelog</string>
     <string name="fetch_changelog_title">Changelog</string>
     <string name="fetch_changelog_progress">Fetching changelog\u2026</string>
-    <string name="copy_changelog">Copy</string>
-    <string name="copy_changelog_success">Successfully copied changelog to clipboard</string>
 </resources>

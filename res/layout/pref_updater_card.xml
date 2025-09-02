@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="?android:attr/listPreferredItemPaddingStart"
+        android:id="@+id/content_wrapper">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+            android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|end"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/options_action"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="top|end"
+                    android:padding="4dip"
+                    android:src="@drawable/ic_menu_icon" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/build_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="18sp"
+                tools:text="PixelExperience_device-10.0-20200115-2020-OFFICIAL.zip" />
+
+            <TextView
+                android:id="@+id/build_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="-5dp"
+                android:maxLines="2"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="14sp"
+                tools:text="15 January 2020" />
+
+            <TextView
+                android:id="@+id/build_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:singleLine="true"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="14sp"
+                tools:text="300 MB"
+                tools:visibility="visible" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:maxHeight="5dp"
+                    android:minHeight="5dp"
+                    android:paddingTop="4sp"
+                    android:progressDrawable="@drawable/ic_progress_bg"
+                    android:visibility="gone"
+                    tools:progress="65"
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/progress_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="35dp"
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    tools:text="162 of 300 MB (3 minutes left) • 65%"
+                    tools:visibility="visible" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:paddingTop="25dp"
+                android:weightSum="1">
+                    
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/update_action"
+                    style="@style/SettingsLibButtonStyle.Expressive.Filled"
+                    android:drawableTint="?android:textColorPrimaryInverse" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

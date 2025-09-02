@@ -50,7 +50,7 @@ import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
-import org.neoteric.ota.ExtrasFragment.UpdateListener;
+import org.neoteric.ota.UpdatesFragment.UpdateListener;
 import org.neoteric.ota.controller.ABUpdateInstaller;
 import org.neoteric.ota.controller.UpdaterController;
 import org.neoteric.ota.controller.UpdaterService;
@@ -86,12 +86,12 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
     private UpdaterService mUpdaterService;
     private BroadcastReceiver mBroadcastReceiver;
 
-    private UpdatesListAdapter mAdapter;
+    private UpdatesFragment mUpdatesFragment;
 
-    private ExtrasFragment mExtrasFragment;
     private SwipeRefreshLayout mSwipeRefresh;
     private UpdateStatus mUpdateStatus;
     private boolean mRefreshButtonEnabled;
+
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -99,17 +99,18 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                                        IBinder service) {
             UpdaterService.LocalBinder binder = (UpdaterService.LocalBinder) service;
             mUpdaterService = binder.getService();
-            mAdapter.setUpdaterController(mUpdaterService.getUpdaterController());
+            mUpdatesFragment.setUpdaterController(mUpdaterService.getUpdaterController());
             getUpdatesList();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            mAdapter.setUpdaterController(null);
+            mUpdatesFragment.setUpdaterController(null);
             mUpdaterService = null;
-            mAdapter.notifyDataSetChanged();
+            mUpdatesFragment.refreshUpdaterPref();
         }
     };
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] grantResults) {
@@ -130,19 +131,14 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updates);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        mAdapter = new UpdatesListAdapter();
-        recyclerView.setAdapter(mAdapter);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        RecyclerView.ItemAnimator animator = recyclerView.getItemAnimator();
-        if (animator instanceof SimpleItemAnimator) {
-            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
-        }
-
         if (ABUpdateInstaller.needsReboot()) {
             return;
         }
+
+        mUpdatesFragment = new UpdatesFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.updater_view, mUpdatesFragment)
+                .commit();
 
         mBroadcastReceiver = new BroadcastReceiver() {
             @Override
@@ -150,14 +146,13 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                 if (UpdaterController.ACTION_UPDATE_STATUS.equals(intent.getAction())) {
                     UpdateStatus status = (UpdateStatus) intent.getSerializableExtra(UpdaterController.EXTRA_STATUS);
                     handleStatusChange(status);
-                    mAdapter.notifyDataSetChanged();
+                    mUpdatesFragment.refreshUpdaterPref();
                 } else if (UpdaterController.ACTION_NETWORK_UNAVAILABLE.equals(intent.getAction())) {
                     showSnackbar(R.string.snack_download_failed, Snackbar.LENGTH_LONG);
                 } else if (UpdaterController.ACTION_DOWNLOAD_PROGRESS.equals(intent.getAction()) ||
                         UpdaterController.ACTION_INSTALL_PROGRESS.equals(intent.getAction())) {
-                    mAdapter.notifyUpdateChanged();
+                    mUpdatesFragment.refreshUpdaterPref();
                 } else if (UpdaterController.ACTION_UPDATE_REMOVED.equals(intent.getAction())) {
-                    mAdapter.removeUpdate();
                     hideUpdates();
                     downloadUpdatesList(false);
                 }else if (ExportUpdateService.ACTION_EXPORT_STATUS.equals(intent.getAction())){
@@ -177,36 +172,6 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                 }
             }
         };
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Switch between header title and appbar title minimizing overlaps
-        final CollapsingToolbarLayout collapsingToolbar =
-                findViewById(R.id.collapsing_toolbar);
-        final AppBarLayout appBar = findViewById(R.id.app_bar);
-        appBar.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean mIsShown = false;
-
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int scrollRange = appBarLayout.getTotalScrollRange();
-                if (!mIsShown && scrollRange + verticalOffset < 10) {
-                    collapsingToolbar.setTitle(getString(R.string.app_name));
-                    mIsShown = true;
-                } else if (mIsShown && scrollRange + verticalOffset > 100) {
-                    collapsingToolbar.setTitle(null);
-                    mIsShown = false;
-                }
-            }
-        });
-
-        mExtrasFragment = new ExtrasFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.extras_view, mExtrasFragment)
-                .commit();
 
         setupRefreshComponents();
         refreshAnimationStart();
@@ -304,12 +269,6 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
-
-    @Override
     public void addedUpdate(Update update) {
         UpdaterController controller = mUpdaterService.getUpdaterController();
         Utils.setPersistentStatus(this, UpdateStatus.Persistent.VERIFIED);
@@ -330,34 +289,35 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
 
     private void hideUpdates() {
         findViewById(R.id.no_new_updates_view).setVisibility(View.VISIBLE);
-        findViewById(R.id.recycler_view).setVisibility(View.GONE);
+        mUpdatesFragment.hideUpdaterPref();
+        mUpdatesFragment.showChangelog(false);
     }
 
-    private void showUpdates() {
+    private void showUpdates(boolean showChangelog) {
         if (ABUpdateInstaller.needsReboot()){
             return;
         }
         findViewById(R.id.no_new_updates_view).setVisibility(View.GONE);
-        findViewById(R.id.recycler_view).setVisibility(View.VISIBLE);
+        mUpdatesFragment.showUpdaterPref();
+        mUpdatesFragment.showChangelog(showChangelog);
     }
 
     private void loadUpdatesList(File jsonFile, boolean manualRefresh)
             throws IOException, JSONException {
-        mExtrasFragment.updatePrefs();
+        mUpdatesFragment.updateCardPrefs();
         Log.d(TAG, "Adding remote updates");
         UpdaterController controller = mUpdaterService.getUpdaterController();
 
         final Update currUpdate = controller.getCurrentUpdate();
         if (currUpdate != null && currUpdate.getDownloadId().equals(Update.LOCAL_ID)) {
-            showUpdates();
-            mAdapter.setDownloadId(Update.LOCAL_ID);
-            mAdapter.notifyDataSetChanged();
+            showUpdates(false);
+            mUpdatesFragment.setDownloadId(Update.LOCAL_ID);
             return;
         }
 
         UpdateInfo newUpdate = Utils.parseJson(jsonFile, true, this);
         boolean updateAvailable = newUpdate != null;
-        if(updateAvailable){
+        if (updateAvailable) {
             controller.addUpdate(newUpdate);
         }
 
@@ -366,11 +326,12 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                     updateAvailable ? R.string.update_found_notification : R.string.snack_no_updates_found,
                     Snackbar.LENGTH_SHORT);
         }
-        hideUpdates();
-        if (newUpdate != null) {
-            showUpdates();
-            mAdapter.setDownloadId(newUpdate.getDownloadId());
-            mAdapter.notifyDataSetChanged();
+
+        if (updateAvailable) {
+            showUpdates(true);
+            mUpdatesFragment.setDownloadId(newUpdate.getDownloadId());
+        } else {
+            hideUpdates();
         }
     }
 
@@ -419,7 +380,7 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                         showSnackbar(R.string.snack_updates_check_failed, Snackbar.LENGTH_LONG);
                     }
                     new Handler().postDelayed(() -> {
-                        showUpdates();
+                        showUpdates(true);
                     }, 1000);
                     refreshAnimationStop();
                 });
@@ -462,7 +423,8 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
         }
         updateRefreshButtonState(false);
         mSwipeRefresh.setRefreshing(true);
-        findViewById(R.id.recycler_view).setVisibility(View.GONE);
+        mUpdatesFragment.hideUpdaterPref();
+        mUpdatesFragment.showChangelog(false);
     }
 
     private void refreshAnimationStop() {

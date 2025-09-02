@@ -16,9 +16,9 @@
  */
 package org.neoteric.ota;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.android.settingslib.collapsingtoolbar.CollapsingToolbarBaseActivity;
 
-public abstract class UpdatesListActivity extends AppCompatActivity {
+public abstract class UpdatesListActivity extends CollapsingToolbarBaseActivity {
     public abstract void showSnackbar(int stringId, int duration);
 
     public abstract void showSnackbar(String text, int duration);

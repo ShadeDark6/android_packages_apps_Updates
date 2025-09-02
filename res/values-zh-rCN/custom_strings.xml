@@ -84,6 +84,8 @@
     <string name="update_over_metered_network_message">您将通过移动数据网络下载更新包，这可能会导致较大的数据用量，是否继续？</string>
     <string name="checkbox_metered_network_warning">不再显示</string>
     <string name="maintainer_info_title">维护者</string>
+    <string name="donate_info_title">捐赠</string>
+    <string name="donate_info_summary">支持开发</string>
     <string name="error_open_url">打开链接失败</string>
     <string name="local_update_title">本地更新</string>
     <string name="local_update_summary">从本地存储应用更新</string>

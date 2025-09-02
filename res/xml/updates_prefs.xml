@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory 
+        android:key="updater_cards"
+        android:layout="@layout/preference_category_no_label">
+        <org.neoteric.ota.prefs.UpdaterCardPreference
+            android:key="updater_card"
+            android:visible="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="extra_cards"
+        android:layout="@layout/preference_category_no_label">
+        <org.neoteric.ota.prefs.CardPreference
+            android:key="local_update"
+            android:icon="@drawable/ic_update_icon"
+            android:title="@string/local_update_title"
+            android:summary="@string/local_update_summary"
+            android:visible="false" />
+
+        <org.neoteric.ota.prefs.CardPreference
+            android:key="maintainer"
+            android:icon="@drawable/ic_maintainers_icon"
+            android:title="@string/maintainer_info_title"
+            android:visible="false" />
+
+        <org.neoteric.ota.prefs.CardPreference
+            android:key="donate"
+            android:icon="@drawable/ic_donate_icon"
+            android:title="@string/donate_info_title"
+            android:summary="@string/donate_info_summary"
+            android:visible="false" />
+
+        <org.neoteric.ota.prefs.CardPreference
+            android:key="group"
+            android:icon="@drawable/ic_group_icon"
+            android:title="@string/group_info_title"
+            android:summary="@string/group_info_summary"
+            android:visible="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
+

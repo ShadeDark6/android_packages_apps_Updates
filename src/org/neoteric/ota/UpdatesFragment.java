@@ -12,19 +12,30 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.preference.PreferenceCategory;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import org.neoteric.ota.controller.UpdaterController;
 import org.neoteric.ota.misc.Utils;
 import org.neoteric.ota.model.Update;
+import org.neoteric.ota.model.UpdateInfo;
 import org.neoteric.ota.model.UpdateStatus;
+
+import org.neoteric.ota.prefs.CardPreference;
+import org.neoteric.ota.prefs.ChangelogPreference;
+import org.neoteric.ota.prefs.UpdaterCardPreference;
+import org.neoteric.ota.prefs.RoundCornerPreferenceAdapter;
 
 import org.neoteric.ota.R;
 
@@ -45,21 +56,39 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class ExtrasFragment extends Fragment {
+public class UpdatesFragment extends PreferenceFragmentCompat {
 
     private static final int SELECT_FILE = 1001;
-    private static final String TAG = "ExtrasFragment";
+    private static final String TAG = "UpdatesFragment";
     private static final String MIME_ZIP = "application/zip";
     private static final String METADATA_PATH = "META-INF/com/android/metadata";
 
-    private View mainView;
-    private ExtraCardView localUpdateCard;
-    private ExtraCardView maintainerCard;
-    private ExtraCardView groupCard;
+    private static final String KEY_UPDATER_PREF = "updater_card";
+    private static final String KEY_CHANGELOG = "changelog";
+    private static final String KEY_UPDATER_CATEGORY = "updater_cards";
+    private static final String KEY_LOCAL_UPDATE = "local_update";
+    private static final String KEY_MAINTAINER = "maintainer";
+    private static final String KEY_DONATE = "donate";
+    private static final String KEY_GROUP = "group";
+
+    private UpdaterCardPreference mUpdaterPref;
+    private ChangelogPreference mChangelogPref;
+    private PreferenceCategory mUpdaterPrefCategory;
+
+    private CardPreference localUpdateCard;
+    private CardPreference maintainerCard;
+    private CardPreference donateCard;
+    private CardPreference groupCard;
+
+    private LocalBroadcastManager mBroadcastManager;
+
+    private UpdaterController mUpdaterController;
+    private UpdateInfo mUpdate;
 
     private String[] deviceList;
     private String[] maintainerNameList;
     private String[] maintainerLinkList;
+    private String[] donateList;
     private String[] groupList;
     private int device_index = -1;
 
@@ -81,29 +110,37 @@ public class ExtrasFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        mainView = inflater.inflate(R.layout.extras_fragment, container, false);
-        localUpdateCard = mainView.findViewById(R.id.local_update_card);
-        maintainerCard = mainView.findViewById(R.id.maintainer_card);
-        groupCard = mainView.findViewById(R.id.group_card);
-
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         deviceList = getContext().getResources().getStringArray(
                 R.array.config_device_list);
         maintainerNameList = getContext().getResources().getStringArray(
                 R.array.config_maintainer_name_list);
         maintainerLinkList = getContext().getResources().getStringArray(
                 R.array.config_maintainer_link_list);
+        donateList = getContext().getResources().getStringArray(
+                R.array.config_donate_list);
         groupList = getContext().getResources().getStringArray(
                 R.array.config_group_list);
         device_index = getDeviceIndex();
-
-        return mainView;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreatePreferences(Bundle savedInstanceState, String key) {
+        setPreferencesFromResource(R.xml.updates_prefs, key);
+        mUpdaterPref = findPreference(KEY_UPDATER_PREF);
+        mUpdaterPrefCategory = findPreference(KEY_UPDATER_CATEGORY);
+
+        localUpdateCard = findPreference(KEY_LOCAL_UPDATE);
+        maintainerCard = findPreference(KEY_MAINTAINER);
+        donateCard = findPreference(KEY_DONATE);
+        groupCard = findPreference(KEY_GROUP);
+    }
+
+    @Override
+    protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+        return new RoundCornerPreferenceAdapter(preferenceScreen);
     }
 
     @Override
@@ -117,8 +154,14 @@ public class ExtrasFragment extends Fragment {
                 if (importDialog != null && importDialog.isShowing()) {
                     importDialog.dismiss();
                 }
-                importDialog = ProgressDialog.show(getContext(), getString(R.string.local_update_title),
-                        getString(R.string.local_update_import_progress), true, false);
+                importDialog = new ProgressDialog(
+                        new ContextThemeWrapper(getContext(),
+                                R.style.AppTheme_AlertDialogStyle));
+                importDialog.setTitle(getString(R.string.local_update_title));
+                importDialog.setMessage(getString(R.string.local_update_import_progress));
+                importDialog.setIndeterminate(true);
+                importDialog.setCancelable(false);
+                importDialog.show();
                 workingThread = new Thread(() -> {
                     File importedFile = null;
                     try {
@@ -133,7 +176,7 @@ public class ExtrasFragment extends Fragment {
                                 importDialog.dismiss();
                                 importDialog = null;
                             }
-                            new AlertDialog.Builder(getContext())
+                            new AlertDialog.Builder(getContext(), R.style.AppTheme_AlertDialogStyle)
                                 .setTitle(R.string.local_update_title)
                                 .setMessage(getString(R.string.local_update_import_success, update.getName()))
                                 .setPositiveButton(R.string.local_update_import_install, (dialog, which) -> {
@@ -176,6 +219,79 @@ public class ExtrasFragment extends Fragment {
         }
 
         super.onPause();
+    }
+
+    public void refreshUpdaterPref() {
+        if (mUpdaterPref != null) {
+            mUpdaterPref.notifyUpdateChanged();
+        }
+    }
+
+    private void fetchChangelog(long timestamp) {
+        if (!Utils.isNetworkAvailable(getContext())) {
+            showSnackbar(R.string.fetch_changelog_failed, Snackbar.LENGTH_LONG);
+            return;
+        }
+
+        new Thread(() -> {
+            String changelog = Utils.getChangelog(getContext(), timestamp);
+
+            Activity activity = getActivity();
+            if (activity == null) return;
+
+            activity.runOnUiThread(() -> {
+                if (changelog != null && !changelog.isEmpty()) {
+                    if (mUpdaterPrefCategory != null && mChangelogPref == null) {
+                        mChangelogPref = new ChangelogPreference(getContext());
+                        mChangelogPref.setKey(KEY_CHANGELOG);
+                        mChangelogPref.setTitle(R.string.fetch_changelog_title);
+                        mUpdaterPrefCategory.addPreference(mChangelogPref);
+                    }
+                    if (mChangelogPref != null) {
+                        mChangelogPref.setSummary(changelog);
+                    }
+                } else {
+                    showSnackbar(R.string.fetch_changelog_failed, Snackbar.LENGTH_LONG);
+                }
+            });
+        }).start();
+    }
+
+    public void showChangelog(boolean value) {
+        if (value) {
+            if (mUpdaterController != null) {
+                mUpdate = mUpdaterController.getCurrentUpdate();
+                fetchChangelog(mUpdate.getTimestamp());
+            }
+        } else if (mUpdaterPrefCategory != null && mChangelogPref != null) {
+            mUpdaterPrefCategory.removePreference(mChangelogPref);
+            mChangelogPref = null;
+        }
+    }
+
+    public void hideUpdaterPref() {
+        if (mUpdaterPref != null) {
+            mUpdaterPref.setVisible(false);
+        }
+    }
+
+    public void showUpdaterPref() {
+        if (mUpdaterPref != null) {
+            mUpdaterPref.setVisible(true);
+        }
+    }
+
+    public void setDownloadId(@NonNull String downloadId) {
+        if (mUpdaterPref != null) {
+            mUpdaterPref.setDownloadId(downloadId);
+        }
+    }
+
+    public void setUpdaterController(UpdaterController controller) {
+        mUpdaterController = controller;
+        if (mUpdaterPref != null) {
+            mUpdaterPref.setUpdaterController(controller);
+        }
     }
 
     private Update buildLocalUpdate(File file, String fileName) {
@@ -291,8 +407,8 @@ public class ExtrasFragment extends Fragment {
         return -1;
     }
 
-    void updatePrefs() {
-        localUpdateCard.setOnClickListener(v -> {
+    void updateCardPrefs() {
+        localUpdateCard.setOnPreferenceClickListener(pref -> {
             final UpdaterController updateController = UpdaterController.getInstance(getContext());
             if (updateController.isInstallingUpdate() ||
                     updateController.isDownloading()) {
@@ -303,28 +419,34 @@ public class ExtrasFragment extends Fragment {
                         .setType(MIME_ZIP);
                 startActivityForResult(intent, SELECT_FILE);
             }
+            return true;
         });
-        localUpdateCard.setClickable(true);
-        localUpdateCard.setVisibility(View.VISIBLE);
+        localUpdateCard.setVisible(true);
 
         if (device_index != -1) {
-            maintainerCard.setOnClickListener(v -> {
+            maintainerCard.setOnPreferenceClickListener(pref -> {
                 openUrl(maintainerLinkList[device_index]);
+                return true;
             });
             maintainerCard.setSummary(maintainerNameList[device_index]);
-            maintainerCard.setClickable(true);
 
-            groupCard.setOnClickListener(v -> {
-                openUrl(groupList[device_index]);
+            donateCard.setOnPreferenceClickListener(pref -> {
+                openUrl(donateList[device_index]);
+                return true;
             });
-            groupCard.setClickable(true);
-            groupCard.setVisibility(View.VISIBLE);
+            donateCard.setVisible(true);
+
+            groupCard.setOnPreferenceClickListener(pref -> {
+                openUrl(groupList[device_index]);
+                return true;
+            });
+            groupCard.setVisible(true);
         } else {
             maintainerCard.setSummary(getContext().getResources().getString(
                     R.string.maintainer_info_unknown));
-            maintainerCard.setClickable(false);
+            maintainerCard.setEnabled(false);
         }
-        maintainerCard.setVisibility(View.VISIBLE);
+        maintainerCard.setVisible(true);
     }
 
     private void showSnackbar(int stringId, int duration) {
