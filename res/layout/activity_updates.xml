@@ -22,20 +22,36 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/no_new_updates_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableTop="@drawable/ic_warning"
-                    android:drawablePadding="16dp"
-                    android:drawableTint="@color/theme_accent_2"
+                    android:orientation="vertical"
                     android:gravity="center"
                     android:paddingStart="46dp"
                     android:paddingTop="16dp"
                     android:paddingEnd="46dp"
-                    android:paddingBottom="16dp"
-                    android:text="@string/list_no_updates"
-                    android:textColor="?android:textColorSecondary" />
+                    android:paddingBottom="16dp">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/no_new_updates_animation"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        app:lottie_rawRes="@raw/no_new_updates"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="false" />
+
+                    <TextView
+                        android:id="@+id/no_new_updates_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/list_no_updates"
+                        android:textColor="?android:textColorSecondary" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/updater_view"

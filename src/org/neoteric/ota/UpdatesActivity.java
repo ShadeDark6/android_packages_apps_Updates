@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,8 +46,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.airbnb.lottie.LottieAnimationView;
+import com.airbnb.lottie.LottieProperty;
+import com.airbnb.lottie.model.KeyPath;
+import com.airbnb.lottie.value.LottieValueCallback;
+
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -91,6 +95,8 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
     private SwipeRefreshLayout mSwipeRefresh;
     private UpdateStatus mUpdateStatus;
     private boolean mRefreshButtonEnabled;
+
+    private LottieAnimationView noNewUpdatesAnimation;
 
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -172,6 +178,9 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                 }
             }
         };
+
+        noNewUpdatesAnimation = findViewById(R.id.no_new_updates_animation);
+        updateLottieColor(noNewUpdatesAnimation);
 
         setupRefreshComponents();
         refreshAnimationStart();
@@ -291,6 +300,28 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
         findViewById(R.id.no_new_updates_view).setVisibility(View.VISIBLE);
         mUpdatesFragment.hideUpdaterPref();
         mUpdatesFragment.showChangelog(false);
+    }
+
+    private void updateLottieColor(LottieAnimationView animationView) {
+        if (animationView == null) return;
+
+        int accentColor = ContextCompat.getColor(this, R.color.theme_accent);
+
+        animationView.addValueCallback(
+                new KeyPath("**"),
+                LottieProperty.COLOR,
+                new LottieValueCallback<>(accentColor)
+        );
+
+        TypedValue typedValue = new TypedValue();
+        getTheme().resolveAttribute(android.R.attr.textColorPrimaryInverse, typedValue, true);
+        int tickColor = ContextCompat.getColor(this, typedValue.resourceId);
+
+        animationView.addValueCallback(
+                new KeyPath("tick Outlines", "**"),
+                LottieProperty.STROKE_COLOR,
+                new LottieValueCallback<>(tickColor)
+        );
     }
 
     private void showUpdates(boolean showChangelog) {
