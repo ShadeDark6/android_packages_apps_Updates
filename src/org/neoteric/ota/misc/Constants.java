@@ -6,7 +6,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,8 +28,10 @@ public final class Constants {
     static final String PROP_AB_DEVICE = "ro.build.ab_update";
     static final String PROP_DEVICE = "ro.product.device";
     static final String PROP_BUILD_VERSION = "ro.neoteric.version";
-    static final String OTA_URL = "https://raw.githubusercontent.com/Neoteric-OS/OTA/%s/%s/ota.json";
-    static final String CHANGELOG_URL = "https://raw.githubusercontent.com/Neoteric-OS/OTA/%s/%s/changelog_%s.txt";
-    static final String CHANGELOG_URL_LOCALE = "https://raw.githubusercontent.com/Neoteric-OS/OTA/%s/%s/changelog_%s-%s-r%s.txt";
+    // Modified to use your GitHub repository and folder structure on the 'vic' branch.
+    // The placeholders %s will be replaced by the ROM's device and version.
+    static final String OTA_URL = "https://raw.githubusercontent.com/ShadeDark6/neoteric-ota/vic/OTA/3.0/marble/ota.json";
+    static final String CHANGELOG_URL = "https://raw.githubusercontent.com/ShadeDark6/neoteric-ota/vic/OTA/3.0/marble/changelog_%s.txt";
+    static final String CHANGELOG_URL_LOCALE = "https://raw.githubusercontent.com/ShadeDark6/neoteric-ota/vic/OTA/3.0/marble/changelog_%s-%s-r%s.txt";
     static final String EXPORT_PATH = "Neoteric-OS-Updates/";
 }
