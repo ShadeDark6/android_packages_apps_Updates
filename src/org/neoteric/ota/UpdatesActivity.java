@@ -102,13 +102,11 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                                        IBinder service) {
             UpdaterService.LocalBinder binder = (UpdaterService.LocalBinder) service;
             mUpdaterService = binder.getService();
-            mUpdatesFragment.setUpdaterController(mUpdaterService.getUpdaterController());
             getUpdatesList();
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
-            mUpdatesFragment.setUpdaterController(null);
             mUpdaterService = null;
             mUpdatesFragment.refreshUpdaterPref();
         }
@@ -275,10 +273,7 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
     }
 
     @Override
-    public void addedUpdate(Update update) {
-        UpdaterController controller = mUpdaterService.getUpdaterController();
-        Utils.setPersistentStatus(this, UpdateStatus.Persistent.VERIFIED);
-        controller.addUpdate(update);
+    public void addedUpdate() {
         getUpdatesList();
         Utils.triggerUpdate(this);
     }

@@ -84,12 +84,14 @@ public class UpdaterCardPreference extends Preference {
     public UpdaterCardPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
+        mUpdaterController = UpdaterController.getInstance(mContext);
         init();
     }
 
     public UpdaterCardPreference(Context context) {
         super(context);
         mContext = context;
+        mUpdaterController = UpdaterController.getInstance(mContext);
         init();
     }
 
@@ -97,11 +99,6 @@ public class UpdaterCardPreference extends Preference {
         setLayoutResource(R.layout.pref_updater_card);
         mBroadcastManager = LocalBroadcastManager.getInstance(mContext);
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
-    }
-
-    public void setUpdaterController(UpdaterController controller) {
-        mUpdaterController = controller;
-        notifyChanged();
     }
 
     public void setDownloadId(String downloadId) {

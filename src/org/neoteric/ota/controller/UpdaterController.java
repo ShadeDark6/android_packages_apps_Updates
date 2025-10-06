@@ -283,7 +283,7 @@ public class UpdaterController {
             File destination = new File(mDownloadRoot, update.getName());
             if (destination.exists()){
                 update.setFile(destination);
-                if(Utils.isABDevice() && (isInstallingABUpdate() || update.getDownloadId().equals(Update.LOCAL_ID))){
+                if((Utils.isABDevice() && isInstallingABUpdate()) || update.getDownloadId().equals(Update.LOCAL_ID)){
                     update.setStatus(UpdateStatus.INSTALLING);
                 }else{
                     verifyUpdateAsync();

@@ -98,7 +98,7 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
 
     private UpdateListener mListener;
     public interface UpdateListener {
-        public void addedUpdate(Update update);
+        public void addedUpdate();
         public void importDisabled();
         public void importFailed();
     }
@@ -112,6 +112,7 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUpdaterController = UpdaterController.getInstance(getContext());
         mBroadcastManager = LocalBroadcastManager.getInstance(getContext());
         deviceList = getContext().getResources().getStringArray(
                 R.array.config_device_list);
@@ -171,6 +172,7 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
                         final Runnable deleteUpdate = () -> Utils.cleanupDownloadsDir(getContext());
 
                         final Update update = buildLocalUpdate(importedFile, fileName);
+                        addUpdate(update);
                         getActivity().runOnUiThread(() -> {
                             if (importDialog != null) {
                                 importDialog.dismiss();
@@ -180,7 +182,7 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
                                 .setTitle(R.string.local_update_title)
                                 .setMessage(getString(R.string.local_update_import_success, update.getName()))
                                 .setPositiveButton(R.string.local_update_import_install, (dialog, which) -> {
-                                    mListener.addedUpdate(update);
+                                    mListener.addedUpdate();
                                 })
                                 .setNegativeButton(android.R.string.cancel, (dialog, which) -> deleteUpdate.run())
                                 .setOnCancelListener((dialog) -> deleteUpdate.run())
@@ -287,13 +289,6 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
         }
     }
 
-    public void setUpdaterController(UpdaterController controller) {
-        mUpdaterController = controller;
-        if (mUpdaterPref != null) {
-            mUpdaterPref.setUpdaterController(controller);
-        }
-    }
-
     private Update buildLocalUpdate(File file, String fileName) {
         final Update update = new Update();
         String regex = "\\d{8}_\\d{6}";
@@ -313,6 +308,11 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
         update.setStatus(UpdateStatus.VERIFIED);
         update.setVersion(Utils.getVersion());
         return update;
+    }
+
+    private void addUpdate(Update update) {
+        Utils.setPersistentStatus(getContext(), UpdateStatus.Persistent.VERIFIED);
+        mUpdaterController.addUpdate(update);
     }
 
     private String readZippedFile(File file, String path) throws IOException {
@@ -409,9 +409,8 @@ public class UpdatesFragment extends PreferenceFragmentCompat {
 
     void updateCardPrefs() {
         localUpdateCard.setOnPreferenceClickListener(pref -> {
-            final UpdaterController updateController = UpdaterController.getInstance(getContext());
-            if (updateController.isInstallingUpdate() ||
-                    updateController.isDownloading()) {
+            if (mUpdaterController.isInstallingUpdate() ||
+                    mUpdaterController.isDownloading()) {
                 mListener.importDisabled();
             } else {
                 final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT)
