@@ -463,7 +463,13 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
     }
 
     private void handleStatusChange(UpdateStatus status) {
-        if (mUpdaterService.getUpdaterController().getCurrentUpdate().getDownloadId().equals(Update.LOCAL_ID)) {
+        if (mUpdaterService.getUpdaterController().getCurrentUpdate().getDownloadId().equals(Update.LOCAL_ID)
+                && status == UpdateStatus.INSTALLATION_FAILED) {
+            if (mUpdateStatus != status) {
+                mUpdateStatus = status;
+            }
+            showSnackbar(R.string.installing_update_error, Snackbar.LENGTH_LONG);
+            hideUpdates();
             return;
         }
         if (mUpdateStatus == status){
@@ -485,11 +491,7 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
                 showSnackbar(R.string.snack_download_verified, Snackbar.LENGTH_LONG);
                 break;
             case INSTALLATION_FAILED:
-                if (Utils.isABDevice()){
-                    handleABInstallationFailed();
-                }else{
-                    showSnackbar(R.string.installing_update_error, Snackbar.LENGTH_LONG);
-                }
+                showSnackbar(R.string.installing_update_error, Snackbar.LENGTH_LONG);
                 break;
         }
     }
@@ -526,10 +528,6 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
         TextView tv = snack.getView().findViewById(com.google.android.material.R.id.snackbar_text);
         tv.setTextColor(getColor(R.color.text_primary));
         snack.show();
-    }
-
-    private void handleABInstallationFailed() {
-        showSnackbar(R.string.installing_update_error, Snackbar.LENGTH_LONG);
     }
 
     private void startDownloadWithWarning() {
