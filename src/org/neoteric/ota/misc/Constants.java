@@ -26,7 +26,7 @@ public final class Constants {
     public static final String PREF_INSTALLING_AB_ID = "installing_ab_id";
     public static final String DOWNLOAD_PATH = "/data/system_updates/";
     static final String PROP_AB_DEVICE = "ro.build.ab_update";
-    static final String PROP_DEVICE = "ro.product.device";
+    static final String PROP_DEVICE = "ro.neoteric.device";
     static final String PROP_BUILD_VERSION = "ro.neoteric.version";
     static final String OTA_URL = "https://raw.githubusercontent.com/Neoteric-OS/OTA/%s/%s/ota.json";
     static final String CHANGELOG_URL = "https://raw.githubusercontent.com/Neoteric-OS/OTA/%s/%s/changelog_%s.txt";
