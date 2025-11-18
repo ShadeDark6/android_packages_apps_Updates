@@ -321,6 +321,7 @@ public class UpdatesActivity extends UpdatesListActivity implements UpdateListen
             return;
         }
         findViewById(R.id.no_new_updates_view).setVisibility(View.GONE);
+        mUpdatesFragment.updateCardPrefs();
         mUpdatesFragment.showUpdaterPref();
         mUpdatesFragment.showChangelog(showChangelog);
     }
